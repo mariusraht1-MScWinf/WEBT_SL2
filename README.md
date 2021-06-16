@@ -5,4 +5,4 @@ Aufteilung in 3 Bereiche:
 2. Zeitliche Entwicklung --> Marius 
 3. Datum + Weitere Statistiken --> Zdravka 
 
-Mittwoch, 18 Uhr oder morgens spontan 
+Dienstag oder Mittwoch spontan 
