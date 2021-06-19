@@ -1,3 +1,19 @@
-  .table {
-    background-color: #deeaee;
+table {
+  background-color: #deeaee;
  }
+ .panel-default{
+  max-width: inherit;
+  max-height: inherit;
+  border:black;
+  border-width: medium;
+}
+.panel-body{
+  background-color:rgb(243, 234, 234);
+}
+p{
+  margin-bottom:0ch;
+  padding-bottom: 0cm;}
+  .panel-footer{
+  max-width: inherit;
+  max-height: inherit;
+  }
