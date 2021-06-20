@@ -16,5 +16,6 @@ p{
       }      
   .col-sm-9{
      border-bottom: 100px; 
+     word-wrap: break-word;
     }
-    
+ 
