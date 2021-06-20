@@ -1,24 +1,7 @@
-table {
-  background-color: #deeaee;
- }
- .panel-default{
-  max-width: inherit;
-  max-height: inherit;
-  border:black;
-  border-width: medium;
-}
-.panel-body{
-  background-color:rgb(243, 234, 234);
-}
 p{
   margin-bottom:0ch;
   padding-bottom: 0cm;}
-  .panel-footer{
-  max-width: inherit;
-  max-height: inherit;
-  }
-
-  .col-sm-1{
+.col-sm-1{
   padding-bottom: 20px;
   padding-top: 20px; 
   margin-top: 20; 
@@ -26,12 +9,12 @@ p{
   border-top-color: black;
   border-bottom-color: black;
   }
-  .border border-white{
-border-width: 20px;
-  }
   .panel-default {
-    background-color: darkgray;
+    background-color: rgb(141, 141, 141);
     position:inherit;
-      top: 0;
-      right: 0;
-    }      
+    border-style: 5px solid black;
+      }      
+  .col-sm-9{
+     border-bottom: 100px; 
+    }
+    
