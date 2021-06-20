@@ -17,3 +17,21 @@ p{
   max-width: inherit;
   max-height: inherit;
   }
+
+  .col-sm-1{
+  padding-bottom: 20px;
+  padding-top: 20px; 
+  margin-top: 20; 
+  margin-bottom: 20;
+  border-top-color: black;
+  border-bottom-color: black;
+  }
+  .border border-white{
+border-width: 20px;
+  }
+  .panel-default {
+    background-color: darkgray;
+    position:inherit;
+      top: 0;
+      right: 0;
+    }      }
