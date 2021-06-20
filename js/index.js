@@ -1,1 +1,2 @@
-create_chart_vaccinations_over_time();
+VaccinationsOverTime.fillCountriesSelect();
+VaccinationsOverTime.create_chart();
