@@ -18,4 +18,8 @@ p{
      border-bottom: 100px; 
      word-wrap: break-word;
     }
- 
+    .es  {
+      text-align: center;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      }
