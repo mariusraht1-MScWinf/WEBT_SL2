@@ -2,19 +2,12 @@ p {
   margin-bottom: 0ch;
   padding-bottom: 0cm;
 }
-.col-sm-1 {
-  padding-bottom: 20px;
-  padding-top: 20px;
-  margin-top: 20;
-  margin-bottom: 20;
-  border-top-color: black;
-  border-bottom-color: black;
-}
 .panel-default {
   background-color: rgb(141, 141, 141);
   position: inherit;
   border-style: 5px solid black;
 }
-.col-sm-9 {
-  border-bottom: 100px;
+.tr {
+border-top: 5px solid black;
+border-bottom: 5px solid black;
 }
