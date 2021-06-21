@@ -1,13 +1,4 @@
-p {
-  margin-bottom: 0ch;
-  padding-bottom: 0cm;
-}
-.panel-default {
-  background-color: rgb(141, 141, 141);
-  position: inherit;
-  border-style: 5px solid black;
-}
-.th {
+table, th, td {
 border-top: 5px solid black;
 border-bottom: 5px solid black;
 }
