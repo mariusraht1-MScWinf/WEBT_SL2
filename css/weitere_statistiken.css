@@ -7,7 +7,7 @@ p {
   position: inherit;
   border-style: 5px solid black;
 }
-.tr {
+.th {
 border-top: 5px solid black;
 border-bottom: 5px solid black;
 }
