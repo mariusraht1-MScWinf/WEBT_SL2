@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>CoronaVis - Visualisierung von Corona Trends</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/weitere statistiken.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- JavaScript -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -18,21 +22,64 @@
     <script src="https://d3js.org/d3.v6.min.js"></script>
   </head>
 
-  <body class="d-flex justify-content-center">
-    <navbar></navbar>
-
+  <body>
+    <header class="container fixed-top bg-primary bg-gradient text-light">
+      <h1 class="text-center">CoronaVis - Visualisierung von Corona Trends</h1>
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a href="#" class="nav-link text-light"> Allgemeine Informationen</a></li>
+          <li class="nav-item"><a href="#chart" class="nav-link text-light">Zeitliche Entwicklung </a></li>
+          <li class="nav-item"><a href="#statistics" class="nav-link text-light"> Weitere Statistiken</a></li>
+        </ul>
+      </nav>
+    </header>
     <main class="container">
-        <div class="bg-light">
+      <div class="bg-light p-3">
+        <img src="img/corona.jpg" alt="Corona Impfbild" class="img-fluid" />
+        <p>
+          Auch im Jahr 2021 hat uns die Pandemie fest im Griff. Diese Seite bietet eine Übersicht über relevante
+          Informationen.
+        </p>
+        <a href="https://www.bundesregierung.de/breg-de/themen/coronavirus" target="_blank"
+          >Mehr Informationen zum Corona Virus auf der Seite der Bundesregierung.
+        </a>
+      </div>
+      <div class="bg-light p-3">
         <h4>Zeitliche Entwicklung</h4>
         <span class="pe-3">Bitte wählen Sie eines der folgenden Länder aus:</span>
-        <select class="w-25" name="countries" id="countries"></select>
+        <select
+          class="w-30"
+          name="countries"
+          id="countries"
+          onchange="VaccinationsOverTime.onChangeSelectCountries(this)"
+        ></select>
         <div id="chart"></div>
       </div>
+      <div class="container-fluid">
+        <div class="row">
+          <span class="border border-dark"></span>
+          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">Datum</div>
+          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">11.02.</div>
+          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">25.02.</div>
+          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">11.03.</div>
+          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">25.03.</div>
+          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">11.04.</div>
+          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">25.04.</div>
+          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">11.05.</div>
+          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">25.05.</div>
+          <span class="border border-dark"></span>
+          <div class="col-sm-9" style="background-color: rgb(212, 227, 230)">Vollständig Geimpfte kumuliert</div>
+          <span class="border border-dark"></span>
+        </div>
+        <div class="panel-heading" id="statistics">Weitere Statistiken</div>
+      </div>
       <div></div>
-      <div></div>
-       </main>
+    </main>
 
+    <script type="text/javascript" src="data/countries.json"></script>
+    <script src="js/vaccinations_over_time.js"></script>
     <script src="js/index.js"></script>
+<<<<<<< HEAD
 
     
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,7 +97,7 @@
       <div class="row">
       <span class="border border-dark"></span>
       <div class="col-sm-1 bg-info.bg-gradient, text white>Datum</div>
-      <div class=col-sm-1 bg-info text wshite>s11.02.</div>
+      <div class="col-sm-1 bg-info.bg-gradient, text white>s11.02.</div>
       <div class="col-sm-1" style="background-color:rgb(6, 170, 199);">25.02.</div>
       <div class="col-sm-1" style="background-color:rgb(6, 170, 199);">11.03.</div>
       <div class="col-sm-1" style="background-color:rgb(6, 170, 199);">25.03.</div>
@@ -67,4 +114,7 @@
       <div class="panel-heading">Weitere Statistiken</div>
       </div>
       </body>
+=======
+  </body>
+>>>>>>> 37ab3016a0db4bd339a5ed59015b8ddf4d348193
 </html>
