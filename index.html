@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>CoronaVis - Visualisierung von Corona Trends</title>
     <!-- CSS -->
     <link rel="stylesheet" href="css/weitere statistiken.css" />
     <link rel="stylesheet" href="css/style.css" />
@@ -23,26 +23,36 @@
   </head>
 
   <body>
-    <header class="container fixed-top bg-primary bg-gradient text-light"> 
+    <header class="container fixed-top bg-primary bg-gradient text-light">
       <h1 class="text-center">CoronaVis - Visualisierung von Corona Trends</h1>
       <nav class="navbar navbar-expand-lg navbar-light">
-    <ul class="navbar-nav mx-auto">
-    <li class="nav-item" > <a href="#" class="nav-link text-light"> Allgemeine Informationen</a></li>
-    <li class="nav-item"> <a href="#chart" class="nav-link text-light">Zeitliche Entwicklung </a> </li>
-    <li class="nav-item"> <a href="#statistics" class="nav-link text-light" > Weitere Statistiken</a></li>
-    </ul>
-    </nav> 
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a href="#" class="nav-link text-light"> Allgemeine Informationen</a></li>
+          <li class="nav-item"><a href="#chart" class="nav-link text-light">Zeitliche Entwicklung </a></li>
+          <li class="nav-item"><a href="#statistics" class="nav-link text-light"> Weitere Statistiken</a></li>
+        </ul>
+      </nav>
     </header>
-    <main class="container" >
-      <div class ="bg-light p-3"> 
-        <img src="img/corona.jpg" alt="Corona Impfbild" class="img-fluid"> 
-        <p>Auch im Jahr 2021 hat uns die Pandemie fest im Griff. Diese Seite bietet eine Übersicht über relevante Informationen. </p>
-        <a href="https://www.bundesregierung.de/breg-de/themen/coronavirus" target="_blank">Mehr Informationen zum Corona Virus auf der Seite der Bundesregierung. </a>
+    <main class="container">
+      <div class="bg-light p-3">
+        <img src="img/corona.jpg" alt="Corona Impfbild" class="img-fluid" />
+        <p>
+          Auch im Jahr 2021 hat uns die Pandemie fest im Griff. Diese Seite bietet eine Übersicht über relevante
+          Informationen.
+        </p>
+        <a href="https://www.bundesregierung.de/breg-de/themen/coronavirus" target="_blank"
+          >Mehr Informationen zum Corona Virus auf der Seite der Bundesregierung.
+        </a>
       </div>
       <div class="bg-light p-3">
         <h4>Zeitliche Entwicklung</h4>
         <span class="pe-3">Bitte wählen Sie eines der folgenden Länder aus:</span>
-        <select class="w-30" name="countries" id="countries"></select>
+        <select
+          class="w-30"
+          name="countries"
+          id="countries"
+          onchange="VaccinationsOverTime.onChangeSelectCountries(this)"
+        ></select>
         <div id="chart"></div>
       </div>
       <div class="container-fluid">
