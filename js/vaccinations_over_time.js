@@ -48,7 +48,6 @@ class VaccinationsOverTime {
 
     svg
       .append("text")
-      // .attr("text-anchor", "end")
       .attr("transform", "rotate(90)")
       .attr("y", margin.left - 20)
       .attr("x", height / 4)
@@ -57,6 +56,9 @@ class VaccinationsOverTime {
 
   static showData(code) {
     console.log(`Show data by code ${code}...`);
+    fetch(`https://l1n.de/tl2/public/country/${code}/vaccinations`)
+      .then((response) => response.json())
+      .then((json) => console.log(json));
   }
 
   static onChangeSelectCountries(selectedItem) {
