@@ -56,28 +56,33 @@
         <div id="chart"></div>
       </div>
       <div class="container-fluid">
-        <div class="row">
-          <span class="border border-dark"></span>
-          <div class="col-sm-4" style="background-color: rgb(6, 170, 199)">Datum</div>
-          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">11.02.</div>
-          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">25.02.</div>
-          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">11.03.</div>
-          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">25.03.</div>
-          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">11.04.</div>
-          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">25.04.</div>
-          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">11.05.</div>
-          <div class="col-sm-1" style="background-color: rgb(6, 170, 199)">25.05.</div>
-          <span class="border border-dark"></span>
-          <div class="col-sm-12" style="background-color: rgb(212, 227, 230)">
-          <p class="text-left">Vollständig </p>
-          <p>Geimpfte</p>
-          <p>(kumuliert)</p>
-          <span class="border border-dark"></span>
-        </div>
-        <div class="panel-heading" id="statistics">Weitere Statistiken</div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Datum</th>
+              <th>11.02.</th>
+              <th>25.02.</th>
+              <th>11.03.</th>
+              <th>25.03.</th>
+              <th>11.04.</th>
+              <th>25.04.</th>
+              <th>11.05.</th>
+              <th>25.05.</th>
+            </tr>
+          </thead>  
+          <tbody>
+            <tr>
+            <td>
+             Vollständig geimpfte (kummuliert)
+           </td>
+           </tr>
+       </tbody>
+        </table>
       </div>
-      <div></div>
-    </main>
+           <div class="panel panel-default">
+           <div class="panel-body">Weitere Statistiken</div>
+         </div>
+      </main>
 
     <script type="text/javascript" src="data/countries.json"></script>
     <script src="js/vaccinations_over_time.js"></script>
