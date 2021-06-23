@@ -1,5 +1,7 @@
 class VaccinationsOverTime {
   static svg;
+  static groupKey = "date";
+  static keys;
   static x;
   static y;
   static margin = { top: 20, right: 20, bottom: 40, left: 90 };
@@ -26,7 +28,6 @@ class VaccinationsOverTime {
 
     this.svg = d3
       .select("#chart")
-      .append("svg")
       .attr("width", this.width + this.margin.left + this.margin.right)
       .attr("height", this.height + this.margin.top + this.margin.bottom)
       .append("g")
@@ -60,11 +61,11 @@ class VaccinationsOverTime {
         return d.total_vaccinations;
       }),
     ]);
+
     this.svg.append("g").attr("class", "axis").call(d3.axisLeft(this.y));
   }
 
   static showData(code) {
-    console.log(`Show data by code ${code}...`);
     fetch(`https://l1n.de/tl2/public/country/${code}/vaccinations`)
       .then((response) => response.json())
       .then((data) => {
