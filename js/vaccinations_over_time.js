@@ -78,4 +78,16 @@ class VaccinationsOverTime {
     let code = selectedItem.selectedOptions[0].dataset.code;
     VaccinationsOverTime.showData(code);
   }
+
+  static showLoader(show = false) {
+    switch (show) {
+      case true:
+        document.querySelector("#loader_vaccinations_over_time").classList.remove("d-none");
+        document.querySelector("#loader_vaccinations_over_time").classList.add("d-inline");
+        break;
+      case false:
+        document.querySelector("#loader_vaccinations_over_time").classList.add("d-none");
+        break;
+    }
+  }
 }

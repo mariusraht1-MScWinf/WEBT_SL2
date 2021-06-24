@@ -53,6 +53,9 @@
           id="countries"
           onchange="VaccinationsOverTime.onChangeSelectCountries(this)"
         ></select>
+      </div>
+      <div class="bg-light">
+        <img id="loader_vaccinations_over_time" src="img/loader.gif" class="d-none position-relative top-50 start-50 translate-middle" />
         <svg id="vaccinations_over_time" class="d-inline-flex"></svg>
       </div>
       <div class="container-fluid">
@@ -91,7 +94,5 @@
     <script src="js/gdp_per_capital.js"></script>
     <script src="js/vaccinations_over_time.js"></script>
     <script src="js/index.js"></script>
-
   </body>
-
 </html>

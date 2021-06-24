@@ -1,3 +1,4 @@
+VaccinationsOverTime.showLoader(true);
 VaccinationsOverTime.fillCountriesSelect();
 GdpPerCapital.test();
 
@@ -43,13 +44,15 @@ d3.json("data/test_vaccinations_over_time.json").then((data) => {
     .attr("font-size", "14px")
     .text("Impfungen (kummuliert)");
 
-  g.selectAll(".bar")
+  g.selectAll("rect")
     .data(data)
     .enter()
     .append("rect")
-    .attr("class", "bar")
     .attr("x", (d) => xScale(d.date))
     .attr("y", (d) => yScale(d.value1))
     .attr("width", xScale.bandwidth())
-    .attr("height", (d) => height - yScale(d.value1));
+    .attr("height", (d) => height - yScale(d.value1))
+    .attr("fill", "green");
+
+  VaccinationsOverTime.showLoader(false);
 });
