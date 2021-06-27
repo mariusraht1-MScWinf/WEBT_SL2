@@ -51,7 +51,7 @@
           class="w-30"
           name="countries"
           id="countries"
-          onchange="VaccinationsOverTime.onChangeSelectCountries(this)"
+          onchange="Countries.onChangeSelectCountries(this)"
         ></select>
       </div>
       <div class="bg-light p-3">
@@ -89,18 +89,18 @@
         </table>
       </div>
       <div class="panel panel-default">
-        <div class="panel-body">Weitere Statistiken</div>
+        <div class="panel-body p-3"><b>Weitere Statistiken</b></div>
       </div>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-6"><svg id="gdp_per_capital"></svg></div>
+          <div class="col-md-6"><svg width="200" height="200" id="gdp_per_capita"></svg></div>
+          <div class="col-md-6"><svg width="200" height="200" id="_________"></svg></div>
         </div>
-        <div class="col-md-6"></div>
       </div>
     </main>
 
     <script src="js/countries.js"></script>
-    <script src="js/gdp_per_capital.js"></script>
+    <script src="js/gdp_per_capita.js"></script>
     <script src="js/vaccinations_over_time.js"></script>
     <script src="js/index.js"></script>
   </body>

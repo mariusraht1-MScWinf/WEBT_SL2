@@ -26,7 +26,7 @@ class VaccinationsOverTime {
     });
   }
 
-  static create_chart(data) {
+  static createChart(data) {
     d3.select("#vaccinations_over_time > *").remove();
 
     let svg = d3.select("#vaccinations_over_time"),
@@ -88,13 +88,8 @@ class VaccinationsOverTime {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        VaccinationsOverTime.create_chart(data);
+        VaccinationsOverTime.createChart(data);
       });
-  }
-
-  static onChangeSelectCountries(selectedItem) {
-    let code = selectedItem.selectedOptions[0].dataset.code;
-    VaccinationsOverTime.showData(code);
   }
 
   static showLoader(show = false) {
