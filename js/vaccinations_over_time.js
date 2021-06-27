@@ -22,50 +22,65 @@ class VaccinationsOverTime {
       d3.select("#countries").selectAll("option").data(json);
 
       document.querySelector("#countries").options[0].selected = true;
-      document.querySelector("#countries").dispatchEvent(new Event('change'));
+      document.querySelector("#countries").dispatchEvent(new Event("change"));
     });
   }
 
   static create_chart(data) {
-    if (this.svg) d3.select("#chart").select("svg").remove();
+    d3.select("#vaccinations_over_time > *").remove();
 
-    this.svg = d3
-      .select("#chart")
-      .attr("width", this.width + this.margin.left + this.margin.right)
-      .attr("height", this.height + this.margin.top + this.margin.bottom)
-      .append("g")
-      .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+    let svg = d3.select("#vaccinations_over_time"),
+      margin = { top: 20, right: 20, bottom: 40, left: 90 },
+      width = 800 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
 
-    this.svg
+    svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
+
+    let xScale = d3
+      .scaleBand()
+      .range([0, width])
+      .padding(0.4)
+      .domain(data.map((d) => d.date));
+
+    let yScale = d3
+      .scaleLinear()
+      .range([height, 0])
+      .domain([0, d3.max(data, (d) => d.total_vaccinations)]);
+
+    let g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    g.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(xScale))
       .append("text")
+      .attr("x", width / 2 + 24)
+      .attr("y", margin.bottom)
       .attr("text-anchor", "end")
-      .attr("x", this.width / 2 + 24)
-      .attr("y", this.height + this.margin.top + 20)
+      .attr("fill", "black")
+      .attr("font-size", "14px")
       .text("Datum");
 
-    this.svg
+    g.append("g")
+      .call(d3.axisLeft(yScale).ticks(10))
       .append("text")
       .attr("transform", "rotate(90)")
-      .attr("y", this.margin.left - 10)
-      .attr("x", this.height / 4)
+      .attr("y", 80)
+      .attr("x", height / 2 + 2 * margin.top + margin.bottom)
+      .attr("fill", "black")
+      .attr("font-size", "14px")
       .text("Impfungen (kummuliert)");
 
-    this.x = d3.scaleTime().range([0, this.width]);
-    this.x.domain(d3.extent(data, (d) => new Date(d.date)));
-    this.svg
-      .append("g")
-      .attr("transform", "translate(0," + this.height + ")")
-      .call(d3.axisBottom(this.x).tickFormat(d3.timeFormat("%Y-%m-%d")));
+    g.selectAll("rect")
+      .data(data)
+      .enter()
+      .append("rect")
+      .attr("x", (d) => xScale(d.date))
+      .attr("y", (d) => yScale(d.total_vaccinations))
+      .attr("width", xScale.bandwidth())
+      .attr("height", (d) => height - yScale(d.total_vaccinations))
+      .attr("fill", "green");
 
-    this.y = d3.scaleLinear().range([this.height, 0]);
-    this.y.domain([
-      0,
-      d3.max(data, function (d) {
-        return d.total_vaccinations;
-      }),
-    ]);
-
-    this.svg.append("g").attr("class", "axis").call(d3.axisLeft(this.y));
+    VaccinationsOverTime.showLoader(false);
   }
 
   static showData(code) {

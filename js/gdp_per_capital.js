@@ -2,7 +2,7 @@ class GdpPerCapital {
   static test() {
     var data = [2, 4, 8, 10];
 
-    var svg = d3.select("svg"),
+    var svg = d3.select("#gdp_per_capital"),
       width = svg.attr("width"),
       height = svg.attr("height"),
       radius = Math.min(width, height) / 2,
