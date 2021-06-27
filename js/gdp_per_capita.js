@@ -1,4 +1,4 @@
-class GdpPerCapital {
+class GdpPerCapita {
   static test() {
     var data = [2, 4, 8, 10];
 
