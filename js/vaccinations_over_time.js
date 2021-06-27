@@ -20,6 +20,9 @@ class VaccinationsOverTime {
       });
 
       d3.select("#countries").selectAll("option").data(json);
+
+      document.querySelector("#countries").options[0].selected = true;
+      document.querySelector("#countries").dispatchEvent(new Event('change'));
     });
   }
 
