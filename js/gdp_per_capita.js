@@ -1,6 +1,11 @@
 class GdpPerCapita {
   static createChart() {
-    let data = [2, 4, 8, 10];
+    let data = 
+    [Deutschland, 45229.245];
+    [Italien, 35220.084];
+    [Spain, 34272.36];
+    [France, 38605.671];
+    [Great Britain, 39753.244];
 
     let svg = d3.select("#gdp_per_capita"),
       width = svg.attr("width"),
@@ -28,3 +33,12 @@ class GdpPerCapita {
       .attr("d", arc);
   }
 }
+static showData(code) {
+ fetch(`https://l1n.de/tl2/public/country/${code}/gdp_per_capita`)
+   .then((response) => response.json())
+   .then((data) => {
+     console.log(data);
+     GdpPerCapita.createChart(data);
+   });
+}
+
