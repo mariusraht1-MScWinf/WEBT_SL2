@@ -1,11 +1,11 @@
 class GdpPerCapita {
   static createChart() {
     let data = [
-    [Deutschland, 45229.245];
-    [Italien, 35220.084];
-    [Spain, 34272.36];
-    [France, 38605.671];
-    [Great Britain, 39753.244];
+    [Deutschland, 45229.245],
+    [Italien, 35220.084],
+    [Spain, 34272.36],
+    [France, 38605.671],
+    [GreatBritain, 39753.244],
 
   ];
 
