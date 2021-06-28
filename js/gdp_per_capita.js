@@ -32,13 +32,5 @@ class GdpPerCapita {
       })
       .attr("d", arc);
   }
-}
-static showData(code) {
- fetch(`https://l1n.de/tl2/public/country/${code}/gdp_per_capita`)
-   .then((response) => response.json())
-   .then((data) => {
-     console.log(data);
-     GdpPerCapita.createChart(data);
-   });
-}
 
+}
