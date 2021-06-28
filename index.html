@@ -88,21 +88,39 @@
           </tbody>
         </table>
       </div>
-      <div class="panel panel-default">
-      <div class="panel-body p-3"><b>Weitere Statistiken</b></div>
-      </div>      
-        <div class="container-fluid">
-          <div class="row">
-           <div class="col-md-6"><svg width= "300" float left height="300" id="gdp_per_capita"></svg></div>
-           <div class="col-md-6"><svg width= "300" float right height="300" id="population_density"></svg></div>
+      
+      <div class="chart-container fluid">
+        <div class="panel panel-default">
+          <div class="panel-body p-3"><b>Weitere Statistiken</b></div>
+            <div class="row">
+           <div class="col-md-6">
+                <div class="col-lg-6">
+                  <div class="card mb-6">
+                    <div><h2>Gdp Per Capita</h2></div>
+                    <div class="card-body">
+                 <svg id="gdp_per_capita" width= "300"  height="300" ></svg>
+               </div>
+              </div>
+            </div>
+          </div>
+              <div class="col-md-6">
+                <div class="col-lg-6">
+                  <div class="card mb-6">
+                    <div><h2>Population Density</h2></div>
+                    <div class="card-body">
+                <svg id="population_density" width= "300" height="300" ></svg>
+        </div>
          </div>
-       </div>
-          </main>
+          </body> 
+ 
+     
+             
+    </main>
 
     <script src="js/countries.js"></script>
-    <script src="js/gdp_per_capita.js"></script>
     <script src="js/population_density.js"></script>
-    <script src="js/vaccinations_over_time.js"></script>
+    <script src="js/gdp_per_capita.js"></script>
+   <script src="js/vaccinations_over_time.js"></script>
     <script src="js/index.js"></script>
   </body>
 </html>
