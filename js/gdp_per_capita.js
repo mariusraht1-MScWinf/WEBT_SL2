@@ -1,15 +1,43 @@
 class GdpPerCapita {
   static createChart() {
     let data = [
-    [Deutschland, 45229.245],
-    [Italien, 35220.084],
-    [Spain, 34272.36],
-    [France, 38605.671],
-    [GreatBritain, 39753.244],
-
-  ];
-
+    {
+    value: 45229.245,
+    color: "#4daf4a",
+    label: 'Germany',
+    labelColor: 'black',
+    labelFontSize: '16',
+    },
+    {
+    value: 35220.084,
+    color: "#377eb8",
+    label: 'Italy',
+    labelColor: 'black',
+    labelFontSize: '16',
+  },
+  {
+  value: 34272.36,
+  color: "#ff7f00",
+  label: 'Spain',
+  labelColor: 'black',
+  labelFontSize: '16',
+},
+{value: 38605.671,
+  color: "#984ea3",
+  label: "France",
+  labelColor: 'black',
+  labelFontSize: '16',
+},
+{
+value: 39753.244,
+  color: "#e41a1c",
+  label: "Great Britain",
+  labelColor: 'black',
+  labelFontSize: '16',
+  }
+ ]
     let svg = d3.select("#gdp_per_capita"),
+      data = data1,
       width = svg.attr("width"),
       height = svg.attr("height"),
       radius = Math.min(width, height) / 2,
@@ -33,6 +61,5 @@ class GdpPerCapita {
         return color(i);
       })
       .attr("d", arc);
-  }
-
+}
 }
