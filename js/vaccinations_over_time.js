@@ -83,12 +83,32 @@ class VaccinationsOverTime {
     VaccinationsOverTime.showLoader(false);
   }
 
+  static createTable(code) {
+    let table = document.getElementById("vaccination_table")
+    table.querySelectorAll("td:not(:first-child), th:not(:first-child)").forEach(x => x.remove());
+    code.forEach(function (item, index){
+      let t = document.createElement("th")
+      t.innerHTML = item.date
+      table.querySelector("thead tr").appendChild(t)
+      t = document.createElement("td")
+      t.innerHTML = item.people_fully_vaccinated == undefined? 0:item.people_fully_vaccinated
+      table.querySelector("tbody tr:first-child").appendChild(t)
+      t = document.createElement("td")
+      t.innerHTML = item.new_vaccinations==undefined? item.total_vaccinations:item.new_vaccinations
+      table.querySelector("tbody tr:nth-child(2)").appendChild(t)
+      t = document.createElement("td")
+      t.innerHTML = item.total_vaccinations
+      table.querySelector("tbody tr:last-child").appendChild(t)
+    }) 
+  }
+
   static showData(code) {
     fetch(`https://l1n.de/tl2/public/country/${code}/vaccinations`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         VaccinationsOverTime.createChart(data);
+        VaccinationsOverTime.createTable(data);
       });
   }
 
