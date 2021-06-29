@@ -37,7 +37,6 @@ value: 39753.244,
   }
  ]
     let svg = d3.select("#gdp_per_capita"),
-      data = data1,
       width = svg.attr("width"),
       height = svg.attr("height"),
       radius = Math.min(width, height) / 2,
