@@ -18,7 +18,6 @@ class VaccinationsOverTime {
         option.dataset.code = entry.code;
         document.querySelector("#countries").append(option);
       });
-
       d3.select("#countries").selectAll("option").data(json);
 
       document.querySelector("#countries").options[0].selected = true;
@@ -83,23 +82,23 @@ class VaccinationsOverTime {
     VaccinationsOverTime.showLoader(false);
   }
 
-  static createTable(code) {
-    let table = document.getElementById("vaccination_table")
-    table.querySelectorAll("td:not(:first-child), th:not(:first-child)").forEach(x => x.remove());
-    code.forEach(function (item, index){
-      let t = document.createElement("th")
-      t.innerHTML = item.date
-      table.querySelector("thead tr").appendChild(t)
-      t = document.createElement("td")
-      t.innerHTML = item.people_fully_vaccinated == undefined? 0:item.people_fully_vaccinated
-      table.querySelector("tbody tr:first-child").appendChild(t)
-      t = document.createElement("td")
-      t.innerHTML = item.new_vaccinations==undefined? item.total_vaccinations:item.new_vaccinations
-      table.querySelector("tbody tr:nth-child(2)").appendChild(t)
-      t = document.createElement("td")
-      t.innerHTML = item.total_vaccinations
-      table.querySelector("tbody tr:last-child").appendChild(t)
-    }) 
+  static createTable(data) {
+    let table = document.getElementById("vaccination_table");
+    table.querySelectorAll("td:not(:first-child), th:not(:first-child)").forEach((x) => x.remove());
+    data.forEach(function (item, index) {
+      let t = document.createElement("th");
+      t.innerHTML = item.date;
+      table.querySelector("thead tr").appendChild(t);
+      t = document.createElement("td");
+      t.innerHTML = item.people_fully_vaccinated == undefined ? 0 : item.people_fully_vaccinated;
+      table.querySelector("tbody tr:first-child").appendChild(t);
+      t = document.createElement("td");
+      t.innerHTML = item.new_vaccinations == undefined ? item.total_vaccinations : item.new_vaccinations;
+      table.querySelector("tbody tr:nth-child(2)").appendChild(t);
+      t = document.createElement("td");
+      t.innerHTML = item.total_vaccinations;
+      table.querySelector("tbody tr:last-child").appendChild(t);
+    });
   }
 
   static showData(code) {

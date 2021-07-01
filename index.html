@@ -33,7 +33,7 @@
         </ul>
       </nav>
     </header>
-    <main class="container">
+    <main class="container bg-light">
       <div class="bg-light p-3">
         <img src="img/corona.jpg" alt="Corona Impfbild" class="img-fluid" />
         <p>
@@ -54,7 +54,7 @@
           onchange="Countries.onChangeSelectCountries(this)"
         ></select>
       </div>
-      <div class="bg-light p-3">
+      <div class="p-3 text-center">
         <img
           id="loader_vaccinations_over_time"
           src="img/loader.gif"
@@ -63,7 +63,10 @@
         <svg id="vaccinations_over_time"></svg>
       </div>
       <div class="container-fluid">
-        <table class="table border border top-4 table border border bottom-4 border border-dark bg-info" id="vaccination_table">
+        <table
+          class="table border border top-4 table border border bottom-4 border border-dark bg-info"
+          id="vaccination_table"
+        >
           <thead>
             <tr>
               <th>Datum</th>
@@ -71,56 +74,44 @@
           </thead>
           <tbody>
             <tr>
-              <td>
-                Vollständig
-                </td>
-                </tr>
-                <tr>
-                  <td>
-                    geimpft
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    kummuliert
-                  </td>
-                </tr>
+              <td>Vollständig</td>
+            </tr>
+            <tr>
+              <td>geimpft</td>
+            </tr>
+            <tr>
+              <td>kummuliert</td>
+            </tr>
           </tbody>
         </table>
       </div>
-            
-      <div class="chart-container fluid">
+
+      <div class="pl-3 pr-3 pb-3 chart-container fluid">
         <div class="panel panel-default">
-          <div class="panel-body p-3"><b>Weitere Statistiken</b></div>
-            <div class="row">
-           <div class="col-md-6">
-                <div class="col-lg-6">
-                  <div class="card mb-6">
-                    <div><h2>Gdp Per Capita</h2></div>
-                    <div class="card-body">
-                 <svg id="gdp_per_capita" width= "300"  height="300" ></svg>
-               </div>
+          <h4 class="ms-3 mb-3">Weitere Statistiken</h4>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="bg-white mb-6 text-center">
+                <div><h5>Gdp Per Capita</h5></div>
+                <div><svg id="gdp_per_capita" width="300" height="300"></svg></div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="bg-white mb-6 text-center">
+                <div><h5>Population density</h5></div>
+                <div><svg id="population_density" width="300" height="300"></svg></div>
               </div>
             </div>
           </div>
-              <div class="col-md-6">
-                <div class="col-lg-6">
-                  <div class="card mb-6">
-                    <div><h2>Population Density</h2></div>
-                    <div class="card-body">
-                <svg id="population_density" width= "300" height="300" ></svg>
         </div>
-         </div>
-          </body> 
- 
-     
-             
+      </div>
     </main>
 
     <script src="js/countries.js"></script>
     <script src="js/gdp_per_capita.js"></script>
     <script src="js/population_density.js"></script>
-   <script src="js/vaccinations_over_time.js"></script>
+    <script src="js/vaccinations_over_time.js"></script>
     <script src="js/index.js"></script>
   </body>
 </html>

@@ -1,3 +1,3 @@
 VaccinationsOverTime.showLoader(true);
 VaccinationsOverTime.fillCountriesSelect();
-GdpPerCapita.createChart();
+PopulationDensity.createChart();

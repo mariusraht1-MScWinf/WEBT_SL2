@@ -1,4 +1,5 @@
 class Countries {
+  // TODO Buffer data
   data = [];
 
   static getData() {
@@ -10,5 +11,6 @@ class Countries {
   static onChangeSelectCountries(selectedItem) {
     let code = selectedItem.selectedOptions[0].dataset.code;
     VaccinationsOverTime.showData(code);
+    GdpPerCapita.showData(code);
   }
 }
