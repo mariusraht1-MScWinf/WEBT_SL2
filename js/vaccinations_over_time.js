@@ -106,8 +106,39 @@ class VaccinationsOverTime {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        VaccinationsOverTime.createChart(data);
-        VaccinationsOverTime.createTable(data);
+        let biweeklydata = []; // new Object for pre aggregation
+        let record;  // copy of item 
+        let intervall = 14; // Days for counting 
+        data.forEach(function (item, index) { //iteration over each item in data, index represents nth item
+          if (index % (intervall+1) == 0) {  // start new record if intervall is met 
+            if(index>0) { // push new record if record was created before 
+              biweeklydata.push(record);
+            }
+            record = Object.assign({}, item); //start new record, copy of item 
+          }
+          else { //if intervall is not met, sum up items in record 
+            if (index % intervall == 0 || data.length == (index+1)) { // Save the last date 
+              record.date = item.date;
+            }
+            for (var prop in item) { // go over each property in item 
+              if (prop != "date") { //dates shall not be saved 
+                if (record[prop]==undefined){ // sometimes item has less properties, add property if missing 
+                  record[prop] = 0;
+                }
+                  record[prop]+=item[prop]; //sum up property 
+              }
+            }
+          }
+
+            if(data.length == (index+1)) // Call of last iteration
+              {
+                biweeklydata.push(record);
+              }
+          
+        });
+        console.log(biweeklydata);
+        VaccinationsOverTime.createChart(biweeklydata);
+        VaccinationsOverTime.createTable(biweeklydata);
       });
   }
 
