@@ -115,12 +115,18 @@ class VaccinationsOverTime {
             if(index>0) { // push new record if record was created before 
               biweeklydata.push(record);
             }
+            if (item["new_vaccinations"]==undefined) {
+              item["new_vaccinations"] = item.total_vaccinations-data[index-1].total_vaccinations; // correction of wrong data 
+            }
             record = Object.assign({}, item); //start new record, copy of item 
           }
           else { //if intervall is not met, sum up items in record 
             if ((index+1) % (intervall) == 0 || data.length == (index+1)) { // Save the last date 
               record.date = item.date; 
               record.total_vaccinations = item.total_vaccinations; // set the last value since those numbers are already accummulated
+            }
+            if (item["new_vaccinations"]==undefined) {
+              item["new_vaccinations"] = item.total_vaccinations-data[index-1].total_vaccinations; // correction of wrong data 
             }
             for (var prop in item) { // go over each property in item 
               if (prop != "date" && prop!= "total_vaccinations") { //dates shall not be saved 
@@ -131,6 +137,7 @@ class VaccinationsOverTime {
                   record[prop]+=item[prop]; //sum up property 
                 }
               }
+
             }
           }
 
