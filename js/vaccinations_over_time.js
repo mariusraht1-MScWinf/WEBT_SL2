@@ -106,14 +106,14 @@ class VaccinationsOverTime {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        let biweeklydata = []; // new Object for pre aggregation
+        let aggregateddata = []; // new Object for pre aggregation
         let record;  // copy of item 
-        let intervall = 2; // Days for counting 
+        let intervall = 7; // Days for counting 
         data[0].new_vaccinations = data[0].people_vaccinated; // set the starting point because new vaccination is missing in first record and it doesnt start with 0
         data.forEach(function (item, index) { //iteration over each item in data, index represents nth item
           if (index % (intervall) == 0) {  // start new record if intervall is met 
             if(index>0) { // push new record if record was created before 
-              biweeklydata.push(record);
+              aggregateddata.push(record);
             }
             if (item["new_vaccinations"]==undefined) {
               item["new_vaccinations"] = item.total_vaccinations-data[index-1].total_vaccinations; // correction of wrong data 
@@ -143,13 +143,13 @@ class VaccinationsOverTime {
 
             if(data.length == (index+1)) // Call of last iteration
               {
-                biweeklydata.push(record);
+                aggregateddata.push(record);
               }
           
         });
-        console.log(biweeklydata);
-        VaccinationsOverTime.createChart(biweeklydata);
-        VaccinationsOverTime.createTable(biweeklydata);
+        console.log(aggregateddata);
+        VaccinationsOverTime.createChart(aggregateddata);
+        VaccinationsOverTime.createTable(aggregateddata);
       });
   }
 
