@@ -100,7 +100,7 @@ class PopulationDensity {
 }
   static showData(code) {
     // TODO: Load all data for all countries
-    fetch(`https://l1n.de/tl2/public/country/${code}/gdp_per_capita`)
+    fetch(`https://l1n.de/tl2/public/country/${code}/population_density`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
