@@ -90,10 +90,10 @@ class VaccinationsOverTime {
       t.innerHTML = item.date;
       table.querySelector("thead tr").appendChild(t);
       t = document.createElement("td");
-      t.innerHTML = item.people_fully_vaccinated == undefined ? 0 : item.people_fully_vaccinated;
+      t.innerHTML = item.people_fully_vaccinated  == undefined ? 0 : item.people_fully_vaccinated; // in case the intervall is set to 1
       table.querySelector("tbody tr:first-child").appendChild(t);
       t = document.createElement("td");
-      t.innerHTML = item.new_vaccinations == undefined ? item.total_vaccinations : item.new_vaccinations;
+      t.innerHTML = item.new_vaccinations  == undefined ? "unknown" : item.new_vaccinations; // in case the intervall is set to 1
       table.querySelector("tbody tr:nth-child(2)").appendChild(t);
       t = document.createElement("td");
       t.innerHTML = item.total_vaccinations;
@@ -108,24 +108,28 @@ class VaccinationsOverTime {
         console.log(data);
         let biweeklydata = []; // new Object for pre aggregation
         let record;  // copy of item 
-        let intervall = 14; // Days for counting 
+        let intervall = 2; // Days for counting 
+        data[0].new_vaccinations = data[0].people_vaccinated; // set the starting point because new vaccination is missing in first record and it doesnt start with 0
         data.forEach(function (item, index) { //iteration over each item in data, index represents nth item
-          if (index % (intervall+1) == 0) {  // start new record if intervall is met 
+          if (index % (intervall) == 0) {  // start new record if intervall is met 
             if(index>0) { // push new record if record was created before 
               biweeklydata.push(record);
             }
             record = Object.assign({}, item); //start new record, copy of item 
           }
           else { //if intervall is not met, sum up items in record 
-            if (index % intervall == 0 || data.length == (index+1)) { // Save the last date 
-              record.date = item.date;
+            if ((index+1) % (intervall) == 0 || data.length == (index+1)) { // Save the last date 
+              record.date = item.date; 
+              record.total_vaccinations = item.total_vaccinations; // set the last value since those numbers are already accummulated
             }
             for (var prop in item) { // go over each property in item 
-              if (prop != "date") { //dates shall not be saved 
+              if (prop != "date" && prop!= "total_vaccinations") { //dates shall not be saved 
                 if (record[prop]==undefined){ // sometimes item has less properties, add property if missing 
-                  record[prop] = 0;
+                  record[prop] = item[prop];
                 }
+                else {
                   record[prop]+=item[prop]; //sum up property 
+                }
               }
             }
           }
