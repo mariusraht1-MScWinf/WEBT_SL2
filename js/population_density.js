@@ -1,7 +1,7 @@
 class PopulationDensity {
   static createChart(data) {
     console.log(data)
-    /* data =  [
+     let dataset =  [
       {
         value: 45229.245,
         color: "#e2bed3",
@@ -46,7 +46,8 @@ class PopulationDensity {
         color: "#fc466b",
         label: "United States",
       },
-    ]; */
+    ]; 
+   console.log (dataset)
 
 
     let svg = d3.select("#population_density"),
@@ -101,18 +102,19 @@ class PopulationDensity {
       .text(function(d,i) { return data[i].label;});
 }
   static showData() {
-    let dataset=[];
+    let dataset =  [];
     let color = ["#e2bed3", "#22c1c3", "#fcb045", "#e6d358", "#7ee3b1", "#e6fc46", "#fc6446",  "#8c9ade", "#fc466b" ]
     Countries.getData().then(async (json) => {
       console.log(json)
-      json.forEach(function (item, index) {
+      json.forEach(async function (item, index) {
         fetch(`https://l1n.de/tl2/public/country/${item.code}/population_density`).then((response) => response.json())
         .then((data) => {
-          dataset.push({ value: data, color: color[index], label:item.country});
+          dataset.push({ "value": data, "color": color[index], "label":item.country});
         })
       })
-      this.createChart(dataset); 
+      this.createChart(dataset)
     })
+    
     
 
     // TODO: Load all data for all countries
