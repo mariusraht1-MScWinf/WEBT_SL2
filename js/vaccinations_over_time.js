@@ -82,7 +82,7 @@ class VaccinationsOverTime {
     VaccinationsOverTime.showLoader(false);
   }
 
-  static createTable(data) {
+ /* static createTable(data) {
     let table = document.getElementById("vaccination_table");
     table.querySelectorAll("td:not(:first-child), th:not(:first-child)").forEach((x) => x.remove());
     data.forEach(function (item, index) {
@@ -99,8 +99,35 @@ class VaccinationsOverTime {
       t.innerHTML = item.total_vaccinations;
       table.querySelector("tbody tr:last-child").appendChild(t);
     });
+  } */
+
+  static createTable(data) {
+    let table = document.getElementById("vaccination_table");
+    table.querySelectorAll("td:not(:first-child), th:not(:first-child)").forEach((x) => x.remove());
+    d3.formatDefaultLocale({
+      "decimal": ",",
+      "grouping": [3],
+      "thousands": ".",
+      "currency": "€"
+    })
+    data.forEach(function (item, index) {
+      let t = document.createElement("th");
+      t.innerHTML = item.date;
+      table.querySelector("thead tr").appendChild(t);
+      t = document.createElement("td");
+      t.innerHTML = d3.format(",")(item.people_fully_vaccinated)//item.people_fully_vaccinated  == undefined ? 0 : item.people_fully_vaccinated; // in case the intervall is set to 1
+      table.querySelector("tbody tr:first-child").appendChild(t);
+      t = document.createElement("td");
+      t.innerHTML = d3.format(",")(item.new_vaccinations)//  == undefined ? "unknown" : item.new_vaccinations; // in case the intervall is set to 1
+      table.querySelector("tbody tr:nth-child(2)").appendChild(t);
+      t = document.createElement("td");
+      t.innerHTML = d3.format(",")(item.total_vaccinations);
+      table.querySelector("tbody tr:last-child").appendChild(t);
+    });
   }
 
+
+/*
   static showData(code) {
     fetch(`https://l1n.de/tl2/public/country/${code}/vaccinations`)
       .then((response) => response.json())
@@ -108,7 +135,7 @@ class VaccinationsOverTime {
         console.log(data);
         let aggregateddata = []; // new Object for pre aggregation
         let record;  // copy of item 
-        let intervall = 7; // Days for counting 
+        let intervall = 1; // Days for counting 
         data[0].new_vaccinations = data[0].people_vaccinated; // set the starting point because new vaccination is missing in first record and it doesnt start with 0
         data.forEach(function (item, index) { //iteration over each item in data, index represents nth item
           if (index % (intervall) == 0) {  // start new record if intervall is met 
@@ -148,6 +175,29 @@ class VaccinationsOverTime {
           
         });
         console.log(aggregateddata);
+        VaccinationsOverTime.createChart(aggregateddata);
+        VaccinationsOverTime.createTable(aggregateddata);
+      });
+  }*/
+
+  static showData (code) {
+    fetch(`https://l1n.de/tl2/public/country/${code}/vaccinations`)
+      .then((response) => response.json())
+      .then((data) => { 
+        console.log(data)
+        data.forEach(function(item,index){
+          console.log(item.date +" "+item.people_fully_vaccinated)
+        })
+        let aggregateddata = []
+        d3.group(data, d => d.date.toString().substring(0,7)).forEach(function (item,index){
+          let month = item[0].date.toString().substring(0,7)
+          aggregateddata.push({
+            'date': month,
+            'new_vaccinations': d3.sum(item, d => d.new_vaccinations),
+            'people_fully_vaccinated': d3.max(item, d => d.people_fully_vaccinated),
+            'total_vaccinations': d3.max(item, d => d.total_vaccinations)
+          })
+        })
         VaccinationsOverTime.createChart(aggregateddata);
         VaccinationsOverTime.createTable(aggregateddata);
       });
