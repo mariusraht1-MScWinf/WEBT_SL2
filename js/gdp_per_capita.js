@@ -1,51 +1,6 @@
 class GdpPerCapita {
-  static createChart() {
-    let data = [
-      {
-        value: 45229.245,
-        color: "#e2bed3",
-        label: "Belgium",
-      },
-      {
-        value: 35220.084,
-        color: "#22c1c3",
-        label: "Denmark",
-      },
-      {
-        value: 34272.36,
-        color: "#fcb045",
-        label: "Germany",
-      },
-      { value: 38605.671, 
-        color: "#e6d358", 
-        label: "Sweden" 
-      },
-      {
-        value: 39753.244,
-        color: "#7ee3b1",
-        label: "Great Britain",
-      },
-      {
-        value: 39753.244,
-        color: "#e6fc46",
-        label: "Italy",
-      },
-      {
-        value: 39753.244,
-        color: "#fc6446",
-        label: "Spain",
-      },
-      {
-        value: 39753.244,
-        color: "#8c9ade",
-        label: "France",
-      },
-      {
-        value: 39753.244,
-        color: "#fc466b",
-        label: "United States",
-      },
-    ];
+  static createChart(data) {
+  
 
     let svg = d3.select("#gdp_per_capita"),
       width = svg.attr("width"),
@@ -98,14 +53,23 @@ class GdpPerCapita {
       .style("text-decoration","bold")
       .text(function(d,i) { return data[i].label;});
 }
-  static showData(code) {
-    // TODO: Load all data for all countries
-    fetch(`https://l1n.de/tl2/public/country/${code}/gdp_per_capita`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        data = [{ value: data, code: code, color: "red" }];
-        GdpPerCapita.createChart(data);
-      });
+ 
+  static showData() {
+    let dataset =  [];
+    let color = ["#e2bed3", "#22c1c3", "#fcb045", "#e6d358", "#7ee3b1", "#e6fc46", "#fc6446",  "#8c9ade", "#fc466b" ]
+    Countries.getData().then( (json) => {
+      console.log(json)
+      json.forEach(function (item, index) {
+        fetch(`https://l1n.de/tl2/public/country/${item.code}/gdp_per_capita`).then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+          dataset.push({ "value": data, "color": color[index], "label":item.country});
+          if (index==8) {
+            GdpPerCapita.createChart(dataset)
+
+          }
+        })
+      })
+    })
   }
 }
