@@ -2,3 +2,6 @@ main { margin-top: 100px;}
 #vaccination_table tr > *:not(:first-child){
   text-align:right
 }
+h4 {
+  scroll-margin-top: 112px;
+}

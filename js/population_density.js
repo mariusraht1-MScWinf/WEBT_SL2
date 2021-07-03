@@ -53,21 +53,27 @@ class PopulationDensity {
       .style("text-decoration","bold")
       .text(function(d,i) { return data[i].label;});
 }
+
+
   static showData() {
     let dataset =  [];
     let color = ["#e2bed3", "#22c1c3", "#fcb045", "#e6d358", "#7ee3b1", "#e6fc46", "#fc6446",  "#8c9ade", "#fc466b" ]
     Countries.getData().then( (json) => {
-      console.log(json)
-      json.forEach(function (item, index) {
-        fetch(`https://l1n.de/tl2/public/country/${item.code}/population_density`).then((response) => response.json())
-        .then((data) => {
-          dataset.push({ "value": data, "color": color[index], "label":item.country});
-          if (index==8) {
-            PopulationDensity.createChart(dataset)
-
-          }
-        })
-      })
+      // recursive function to load country data completely before creating the pie chart
+      function getCountryData(json) {
+        if (json.length == 0) { // termination condition: no country left to load, so draw chart
+          PopulationDensity.createChart (dataset);
+        } else { // while countries left
+          let item = json.pop(); // get next country and remove it from array
+          // call API and call getCountryData recursively in promise
+          fetch(`https://l1n.de/tl2/public/country/${item.code}/population_density`).then((response) => response.json())
+          .then((data) => {
+            dataset.push({ "value": data, "color": color.pop(), "label":item.country});
+            getCountryData (json);
+          })
+        }
+      }
+      getCountryData (json);
     })
   }
 }
