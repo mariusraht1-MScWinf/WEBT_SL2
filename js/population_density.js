@@ -99,6 +99,8 @@ class PopulationDensity {
       .text(function(d,i) { return data[i].label;});
 }
   static showData(code) {
+    Countries.getData().then((json) => 
+      console.log(json))
     // TODO: Load all data for all countries
     fetch(`https://l1n.de/tl2/public/country/${code}/population_density`)
       .then((response) => response.json())

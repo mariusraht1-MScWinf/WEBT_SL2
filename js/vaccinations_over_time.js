@@ -185,9 +185,6 @@ class VaccinationsOverTime {
       .then((response) => response.json())
       .then((data) => { 
         console.log(data)
-        data.forEach(function(item,index){
-          console.log(item.date +" "+item.people_fully_vaccinated)
-        })
         let aggregateddata = []
         d3.group(data, d => d.date.toString().substring(0,7)).forEach(function (item,index){
           let month = item[0].date.toString().substring(0,7)

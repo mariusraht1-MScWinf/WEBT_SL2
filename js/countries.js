@@ -11,7 +11,6 @@ class Countries {
   static onChangeSelectCountries(selectedItem) {
     let code = selectedItem.selectedOptions[0].dataset.code;
     VaccinationsOverTime.showData(code);
-    //VaccinationsOverTime.AggregatedData(code);
     GdpPerCapita.showData(code);
   }
 }
