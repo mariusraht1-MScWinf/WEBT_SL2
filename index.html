@@ -27,14 +27,14 @@
       <h1 class="text-center">CoronaVis - Visualisierung von Corona Trends</h1>
       <nav class="navbar navbar-expand-lg navbar-light">
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"><a href="#" class="nav-link text-light"> Allgemeine Informationen</a></li>
-          <li class="nav-item"><a href="#chart" class="nav-link text-light">Zeitliche Entwicklung </a></li>
-          <li class="nav-item"><a href="#statistics" class="nav-link text-light"> Weitere Statistiken</a></li>
+          <li class="nav-item"><a href="#allgemeine_informationen" class="nav-link text-light"> Allgemeine Informationen</a></li>
+          <li class="nav-item"><a href="#zeitliche_entwicklungen" class="nav-link text-light">Zeitliche Entwicklung </a></li>
+          <li class="nav-item"><a href="#weitere_statistiken" class="nav-link text-light"> Weitere Statistiken</a></li>
         </ul>
       </nav>
     </header>
     <main class="container bg-light">
-      <div class="bg-light p-3">
+      <div class="bg-light p-3"><a id="allgemeine_informationen"></a>
         <img src="img/corona.jpg" alt="Corona Impfbild" class="img-fluid" />
         <p>
           Auch im Jahr 2021 hat uns die Pandemie fest im Griff. Diese Seite bietet eine Übersicht über relevante
@@ -45,7 +45,7 @@
         </a>
       </div>
       <div class="bg-light ps-3">
-        <h4 id="chart">Zeitliche Entwicklung</h4>
+        <h4 id="chart"><a id="zeitliche_entwicklungen"></a>Zeitliche Entwicklung</h4>
         <span class="pe-3">Bitte wählen Sie eines der folgenden Länder aus:</span>
         <select
           class="w-30"
@@ -55,66 +55,52 @@
         ></select>
       </div>
       <div class="p-3 text-center">
-        <img
-          id="loader_vaccinations_over_time"
-          src="img/loader.gif"
-          class="d-none loader"
-        />
+        <img id="loader_vaccinations_over_time" src="img/loader.gif" class="d-none loader" />
         <svg id="vaccinations_over_time" class="img-fluid"></svg>
       </div>
       <div class="container-fluid">
         <div class="scrollable">
-        <table
-          class="table border border top-4 table border border bottom-4 border border-dark bg-info"
-          id="vaccination_table"
-        >
-          <thead>
-            <tr>
-              <th>Datum</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Vollständig</td>
-            </tr>
-            <tr>
-              <td>neu geimpft</td>
-            </tr>
-            <tr>
-              <td>kummuliert</td>
-            </tr>
-          </tbody>
-        </table>
+          <table
+            class="table border border top-4 table border border bottom-4 border border-dark bg-info"
+            id="vaccination_table"
+          >
+            <thead>
+              <tr>
+                <th>Datum</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Vollständig</td>
+              </tr>
+              <tr>
+                <td>neu geimpft</td>
+              </tr>
+              <tr>
+                <td>kummuliert</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
       <div class="pl-3 pr-3 pb-3 chart-container container-fluid">
         <div class="panel panel-default">
-          <h4 class="ms-3 mb-3" id="statistics">Weitere Statistiken</h4>
-          
+          <h4 class="ms-3 mb-3" id="statistics"><a id="weitere_statistiken"></a>Weitere Statistiken</h4>
+
           <div class="row">
             <div class="col-md-6">
               <div class="bg-white mb-6 text-center">
                 <div><h5>BIP pro Kopf</h5></div>
-                <img
-          id="loader_gdp_per_capita"
-          src="img/loader.gif"
-          class="d-none loader"
-        />
+                <img id="loader_gdp_per_capita" src="img/loader.gif" class="d-none loader" />
                 <div><svg class="img-fluid" id="gdp_per_capita"></svg></div>
-              
               </div>
             </div>
             <div class="col-md-6">
               <div class="bg-white mb-6 text-center">
                 <div><h5>Bevölkerungsdichte</h5></div>
-                <img
-          id="loader_population_density"
-          src="img/loader.gif"
-          class="d-none loader"
-        />
+                <img id="loader_population_density" src="img/loader.gif" class="d-none loader" />
                 <div><svg class="img-fluid" id="population_density"></svg></div>
-               
               </div>
             </div>
           </div>
