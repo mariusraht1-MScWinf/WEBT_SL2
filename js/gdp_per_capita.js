@@ -62,6 +62,8 @@ class GdpPerCapita {
       .style("font-size","18px")
       .style("text-decoration","bold")
       .text(function(d,i) { return data[i].label;});
+
+      showLoader("loader_gdp_per_capita", false);
 }
 
 static showData() {

@@ -90,7 +90,7 @@ class VaccinationsOverTime {
       .attr("height", (d) => height - yScale(d.total_vaccinations))
       .attr("fill", "green");
 
-    VaccinationsOverTime.showLoader(false);
+    showLoader("loader_vaccinations_over_time", false);
   }
 
  /* static createTable(data) {
@@ -211,15 +211,4 @@ class VaccinationsOverTime {
       });
   }
 
-  static showLoader(show = false) {
-    switch (show) {
-      case true:
-        document.querySelector("#loader_vaccinations_over_time").classList.remove("d-none");
-        document.querySelector("#loader_vaccinations_over_time").classList.add("d-inline");
-        break;
-      case false:
-        document.querySelector("#loader_vaccinations_over_time").classList.add("d-none");
-        break;
-    }
-  }
 }

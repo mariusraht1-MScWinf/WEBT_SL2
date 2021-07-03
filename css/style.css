@@ -17,3 +17,7 @@ h4 {
   -webkit-overflow-scrolling: touch;
   width: 100%;
 }
+.loader {
+  margin: 100px auto;
+  display: block;
+}
