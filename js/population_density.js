@@ -1,12 +1,25 @@
+
+
 class PopulationDensity {
-  static createChart(data) {
 
-
-    let svg = d3.select("#population_density"),
-      width = svg.attr("width"),
-      height = svg.attr("height"),
+  static createChart(data, onresize=false) {
+     d3.selectAll("#population_density > *").remove();
+     let svg = d3.select("#population_density"),
+      width = document.getElementById("population_density").parentElement.clientWidth -20,
+      height = width, // make it square
       radius = Math.min(width, height) / 2,
       g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+      svg.attr("width", width).attr("height", height);
+
+      if (!onresize) {
+      window.addEventListener('resize', function () {
+        let w = document.getElementById("population_density").parentElement.clientWidth -20;
+        console.log(w)
+        let svg = d3.select("#population_density");
+        svg.attr("width", w).attr("height", w);
+        PopulationDensity.createChart (data, true);
+      })
+    }
 
     let color = d3.scaleOrdinal(data.map((d) => d.color));
 
