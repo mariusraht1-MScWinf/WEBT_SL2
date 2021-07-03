@@ -39,22 +39,22 @@ class VaccinationsOverTime {
       });
     });
 
-    let margin = { top: 20, right: 20, bottom: 40, left: 70 };
+    let margin = { top: 20, right: 20, bottom: 50, left: 80 };
     let w = document.getElementById("vaccinations_over_time").parentElement.clientWidth;
     let width = w - margin.left - margin.right,
       height = w / 2 - margin.top - margin.bottom;
 
-    var x0 = d3.scaleBand().rangeRound([0, width], 0.5);
-    var x1 = d3.scaleBand();
-    var y = d3.scaleLinear().rangeRound([height, 0]);
+    let x0 = d3.scaleBand().rangeRound([0, width], 0.5);
+    let x1 = d3.scaleBand();
+    let y = d3.scaleLinear().rangeRound([height, 0]);
 
-    var xAxis = d3
+    let xAxis = d3
       .axisBottom()
       .scale(x0)
       .tickFormat(d3.timeFormat("%-m/%Y"))
       .tickValues(groupedData.map((d) => d.key));
 
-    var yAxis = d3.axisLeft().scale(y);
+    let yAxis = d3.axisLeft().scale(y);
     if (!onresize) {
       window.addEventListener("resize", function () {
         let w = document.getElementById("vaccinations_over_time").parentElement.clientWidth - 20;
@@ -73,20 +73,41 @@ class VaccinationsOverTime {
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var categoriesNames = groupedData.map((d) => d.key);
-    var rateNames = groupedData[0].values.map((gd) => gd.name);
+    let fullyVaccinated = groupedData.map((d) => d.key);
+    let newVaccinated = groupedData[0].values.map((gd) => gd.name);
 
-    x0.domain(categoriesNames);
-    x1.domain(rateNames).rangeRound([0, x0.bandwidth()]);
+    x0.domain(fullyVaccinated);
+    x1.domain(newVaccinated).rangeRound([0, x0.bandwidth()]);
     y.domain([0, d3.max(groupedData, (key) => d3.max(key.values, (gd) => gd.value))]);
 
+    // X-Achse
     svg
       .append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+      .call(xAxis)
+      .append("text")
+      .attr("dx", width / 2)
+      .attr("dy", 34)
+      .attr("fill", "black")
+      .attr("font-size", "14px")
+      .attr("font-weight", "bold")
+      .text("Datum");
 
-    svg.append("g").attr("class", "y axis").style("opacity", "0").call(yAxis);
+    // Y-Achse
+    svg
+      .append("g")
+      .attr("class", "y axis")
+      .style("opacity", "0")
+      .call(yAxis)
+      .append("text")
+      .attr("y", height / 2 - margin.left + margin.right)
+      .attr("x", (width + margin.top + margin.bottom) / 3)
+      .attr("transform", "rotate(90)")
+      .attr("fill", "black")
+      .attr("font-size", "14px")
+      .attr("font-weight", "bold")
+      .text("Impfungen (kummuliert)");
 
     svg.select(".y").style("opacity", "1");
 
@@ -116,82 +137,6 @@ class VaccinationsOverTime {
 
     showLoader("loader_vaccinations_over_time", false);
   }
-
-  // static createChart(data) {
-  //   d3.select("#vaccinations_over_time > *").remove();
-
-  //   let svg = d3.select("#vaccinations_over_time"),
-  //     margin = { top: 20, right: 20, bottom: 40, left: 90 },
-  //     width = 800 - margin.left - margin.right,
-  //     height = 400 - margin.top - margin.bottom;
-
-  //   svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
-
-  //   let xScale = d3
-  //     .scaleBand()
-  //     .range([0, width])
-  //     .padding(0.4)
-  //     .domain(data.map((d) => d.date));
-
-  //   let yScale = d3
-  //     .scaleLinear()
-  //     .range([height, 0])
-  //     .domain([0, d3.max(data, (d) => d.total_vaccinations)]);
-
-  //   let g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  //   g.append("g")
-  //     .attr("transform", "translate(0," + height + ")")
-  //     .call(d3.axisBottom(xScale))
-  //     .append("text")
-  //     .attr("x", width / 2 + 24)
-  //     .attr("y", margin.bottom)
-  //     .attr("text-anchor", "end")
-  //     .attr("fill", "black")
-  //     .attr("font-size", "14px")
-  //     .text("Datum");
-
-  //   g.append("g")
-  //     .call(d3.axisLeft(yScale).ticks(10))
-  //     .append("text")
-  //     .attr("transform", "rotate(90)")
-  //     .attr("y", 80)
-  //     .attr("x", height / 2 + 2 * margin.top + margin.bottom)
-  //     .attr("fill", "black")
-  //     .attr("font-size", "14px")
-  //     .text("Impfungen (kummuliert)");
-
-  //   g.selectAll("rect")
-  //     .data(data)
-  //     .enter()
-  //     .append("rect")
-  //     .attr("x", (d) => xScale(d.date))
-  //     .attr("y", (d) => yScale(d.total_vaccinations))
-  //     .attr("width", xScale.bandwidth())
-  //     .attr("height", (d) => height - yScale(d.total_vaccinations))
-  //     .attr("fill", "green");
-
-  //   VaccinationsOverTime.showLoader(false);
-  // }
-
-  /* static createTable(data) {
-    let table = document.getElementById("vaccination_table");
-    table.querySelectorAll("td:not(:first-child), th:not(:first-child)").forEach((x) => x.remove());
-    data.forEach(function (item, index) {
-      let t = document.createElement("th");
-      t.innerHTML = item.date;
-      table.querySelector("thead tr").appendChild(t);
-      t = document.createElement("td");
-      t.innerHTML = item.people_fully_vaccinated  == undefined ? 0 : item.people_fully_vaccinated; // in case the intervall is set to 1
-      table.querySelector("tbody tr:first-child").appendChild(t);
-      t = document.createElement("td");
-      t.innerHTML = item.new_vaccinations  == undefined ? "unknown" : item.new_vaccinations; // in case the intervall is set to 1
-      table.querySelector("tbody tr:nth-child(2)").appendChild(t);
-      t = document.createElement("td");
-      t.innerHTML = item.total_vaccinations;
-      table.querySelector("tbody tr:last-child").appendChild(t);
-    });
-  } */
 
   static createTable(data) {
     let table = document.getElementById("vaccination_table");
@@ -241,7 +186,7 @@ class VaccinationsOverTime {
             if (item["new_vaccinations"]==undefined) {
               item["new_vaccinations"] = item.total_vaccinations-data[index-1].total_vaccinations; // correction of wrong data 
             }
-            for (var prop in item) { // go over each property in item 
+            for (let prop in item) { // go over each property in item 
               if (prop != "date" && prop!= "total_vaccinations") { //dates shall not be saved 
                 if (record[prop]==undefined){ // sometimes item has less properties, add property if missing 
                   record[prop] = item[prop];
