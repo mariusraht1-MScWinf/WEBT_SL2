@@ -1,11 +1,13 @@
 class Countries {
-  // TODO Buffer data
-  data = [];
+  static data = [];
 
   static getData() {
-    return fetch("data/countries.json")
-      .then((response) => response.json())
-      .then((json) => json.sort((a, b) => d3.ascending(a.country, b.country)));
+    if (!Countries.data || Countries.data.length == 0) {
+      Countries.data = fetch("data/countries.json")
+        .then((response) => response.json())
+        .then((json) => json.sort((a, b) => d3.ascending(a.country, b.country)));
+    }
+    return Countries.data;
   }
 
   static onChangeSelectCountries(selectedItem) {

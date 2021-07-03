@@ -25,28 +25,24 @@ class VaccinationsOverTime {
     });
   }
 
-  static createChart(data, onresize=false) {
-    d3.select("#vaccinations_over_time > *").remove();
+  static createChart(data, onresize = false) {
+    d3.selectAll("#vaccinations_over_time > *").remove();
 
     let groupedData = [];
     data.forEach((d) => {
       groupedData.push({
         key: new Date(d.date),
         values: [
-          { name: "first", value: d.new_vaccinations },
-          { name: "complete", value: d.people_fully_vaccinated },
+          { name: "first", value: d.people_fully_vaccinated },
+          { name: "complete", value: d.new_vaccinations },
         ],
       });
     });
 
-    let margin = { top: 20, right: 20, bottom: 30, left: 70 },
-      width = 800 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+    let margin = { top: 20, right: 20, bottom: 40, left: 70 };
     let w = document.getElementById("vaccinations_over_time").parentElement.clientWidth;
-    let svg = d3.select("#vaccinations_over_time"),
-      margin = { top: 20, right: 20, bottom: 40, left: 90 },
-      width = w - margin.left - margin.right,
-      height = w/2 - margin.top - margin.bottom;
+    let width = w - margin.left - margin.right,
+      height = w / 2 - margin.top - margin.bottom;
 
     var x0 = d3.scaleBand().rangeRound([0, width], 0.5);
     var x1 = d3.scaleBand();
@@ -60,19 +56,13 @@ class VaccinationsOverTime {
 
     var yAxis = d3.axisLeft().scale(y);
     if (!onresize) {
-      window.addEventListener('resize', function () {
-        let w = document.getElementById("vaccinations_over_time").parentElement.clientWidth -20;
+      window.addEventListener("resize", function () {
+        let w = document.getElementById("vaccinations_over_time").parentElement.clientWidth - 20;
         let svg = d3.select("#vaccinations_over_time");
         svg.attr("width", w).attr("height", w);
-        VaccinationsOverTime.createChart (data, true);
-      })
+        VaccinationsOverTime.createChart(data, true);
+      });
     }
-
-    let xScale = d3
-      .scaleBand()
-      .range([0, width])
-      .padding(0.4)
-      .domain(data.map((d) => d.date));
 
     const color = d3.scaleOrdinal(["lightblue", "lightgreen"]);
 
@@ -123,7 +113,7 @@ class VaccinationsOverTime {
       .selectAll("rect")
       .attr("y", (gd) => y(gd.value))
       .attr("height", (gd) => height - y(gd.value));
-      
+
     showLoader("loader_vaccinations_over_time", false);
   }
 
@@ -206,7 +196,7 @@ class VaccinationsOverTime {
   static createTable(data) {
     let table = document.getElementById("vaccination_table");
     table.querySelectorAll("td:not(:first-child), th:not(:first-child)").forEach((x) => x.remove());
-    
+
     data.forEach(function (item, index) {
       let t = document.createElement("th");
       t.innerHTML = item.date;
@@ -295,5 +285,4 @@ class VaccinationsOverTime {
         VaccinationsOverTime.createTable(aggregatedData);
       });
   }
-
 }
