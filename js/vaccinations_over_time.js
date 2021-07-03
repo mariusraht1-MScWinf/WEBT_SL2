@@ -25,15 +25,24 @@ class VaccinationsOverTime {
     });
   }
 
-  static createChart(data) {
+  static createChart(data, onresize=false) {
     d3.select("#vaccinations_over_time > *").remove();
-
+    let w = document.getElementById("vaccinations_over_time").parentElement.clientWidth;
     let svg = d3.select("#vaccinations_over_time"),
       margin = { top: 20, right: 20, bottom: 40, left: 90 },
-      width = 800 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+      width = w - margin.left - margin.right,
+      height = w/2 - margin.top - margin.bottom;
 
     svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
+
+    if (!onresize) {
+      window.addEventListener('resize', function () {
+        let w = document.getElementById("vaccinations_over_time").parentElement.clientWidth -20;
+        let svg = d3.select("#vaccinations_over_time");
+        svg.attr("width", w).attr("height", w);
+        VaccinationsOverTime.createChart (data, true);
+      })
+    }
 
     let xScale = d3
       .scaleBand()
@@ -50,23 +59,25 @@ class VaccinationsOverTime {
 
     g.append("g")
       .attr("transform", "translate(0," + height + ")")
+      .attr("class", "xaxis")
       .call(d3.axisBottom(xScale))
       .append("text")
       .attr("x", width / 2 + 24)
       .attr("y", margin.bottom)
       .attr("text-anchor", "end")
       .attr("fill", "black")
-      .attr("font-size", "14px")
+      .attr("font-size", "16px")
       .text("Datum");
 
     g.append("g")
+      .attr("class", "yaxis")
       .call(d3.axisLeft(yScale).ticks(10))
       .append("text")
       .attr("transform", "rotate(90)")
       .attr("y", 80)
       .attr("x", height / 2 + 2 * margin.top + margin.bottom)
       .attr("fill", "black")
-      .attr("font-size", "14px")
+      .attr("font-size", "16px")
       .text("Impfungen (kummuliert)");
 
     g.selectAll("rect")
