@@ -5,3 +5,19 @@ main { margin-top: 100px;}
 h4 {
   scroll-margin-top: 112px;
 }
+.xaxis {
+  font-size: 14px;
+}
+.yaxis {
+  font-size: 12px;
+}
+.scrollable {
+  overflow: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+.loader {
+  margin: 100px auto;
+  display: block;
+}

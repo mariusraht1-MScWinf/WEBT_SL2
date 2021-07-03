@@ -1,12 +1,22 @@
 class GdpPerCapita {
-  static createChart(data) {
+  static createChart(data, onresize=false) {
   
-
+    d3.selectAll("#gdp_per_capita > *").remove();
     let svg = d3.select("#gdp_per_capita"),
-      width = svg.attr("width"),
-      height = svg.attr("height"),
+      width = document.getElementById("gdp_per_capita").parentElement.clientWidth -20,
+      height = width, // make it square
       radius = Math.min(width, height) / 2,
       g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+      svg.attr("width", width).attr("height", height);
+
+      if (!onresize) {
+        window.addEventListener('resize', function () {
+          let w = document.getElementById("gdp_per_capita").parentElement.clientWidth -20;
+          let svg = d3.select("#gdp_per_capita");
+          svg.attr("width", w).attr("height", w);
+          GdpPerCapita.createChart (data, true);
+        })
+      }
 
     let color = d3.scaleOrdinal(data.map((d) => d.color));
 
@@ -29,6 +39,8 @@ class GdpPerCapita {
           return this != current
         });
         others.selectAll("path").style('opacity', 0.3);
+        others.selectAll("text").style("display", "none");
+        d3.select(current).selectAll("text").style("display", "inline");
       })
       .on('mouseout', function() {
         var current = this;
@@ -51,7 +63,10 @@ class GdpPerCapita {
       .attr("text-anchor","middle")
       .style("font-size","18px")
       .style("text-decoration","bold")
-      .text(function(d,i) { return data[i].label;});
+      .style("display", "none")
+      .text(function(d,i) { return data[i].label+": "+d3.format(",d")(data[i].value);});
+
+      showLoader("loader_gdp_per_capita", false);
 }
 
 static showData() {

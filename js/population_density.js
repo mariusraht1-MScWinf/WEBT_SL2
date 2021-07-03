@@ -1,12 +1,24 @@
+
+
 class PopulationDensity {
-  static createChart(data) {
 
-
-    let svg = d3.select("#population_density"),
-      width = svg.attr("width"),
-      height = svg.attr("height"),
+  static createChart(data, onresize=false) {
+     d3.selectAll("#population_density > *").remove();
+     let svg = d3.select("#population_density"),
+      width = document.getElementById("population_density").parentElement.clientWidth -20,
+      height = width, // make it square
       radius = Math.min(width, height) / 2,
       g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+      svg.attr("width", width).attr("height", height);
+
+      if (!onresize) {
+      window.addEventListener('resize', function () {
+        let w = document.getElementById("population_density").parentElement.clientWidth -20;
+        let svg = d3.select("#population_density");
+        svg.attr("width", w).attr("height", w);
+        PopulationDensity.createChart (data, true);
+      })
+    }
 
     let color = d3.scaleOrdinal(data.map((d) => d.color));
 
@@ -29,6 +41,8 @@ class PopulationDensity {
           return this != current
         });
         others.selectAll("path").style('opacity', 0.3);
+        others.selectAll("text").style("display", "none");
+        d3.select(current).selectAll("text").style("display", "inline");
       })
       .on('mouseout', function() {
         var current = this;
@@ -50,8 +64,11 @@ class PopulationDensity {
        return "translate("+ arc.centroid(d) + ")"; })
       .attr("text-anchor","middle")
       .style("font-size","18px")
+      .style("display", "none")
       .style("text-decoration","bold")
-      .text(function(d,i) { return data[i].label;});
+      .text(function(d,i) { return data[i].label+": "+d3.format(",")(data[i].value);});
+
+      showLoader("loader_population_density", false);
 }
 
 

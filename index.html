@@ -58,11 +58,12 @@
         <img
           id="loader_vaccinations_over_time"
           src="img/loader.gif"
-          class="d-none position-relative top-50 start-50 translate-middle"
+          class="d-none loader"
         />
-        <svg id="vaccinations_over_time"></svg>
+        <svg id="vaccinations_over_time" class="img-fluid"></svg>
       </div>
       <div class="container-fluid">
+        <div class="scrollable">
         <table
           class="table border border top-4 table border border bottom-4 border border-dark bg-info"
           id="vaccination_table"
@@ -84,26 +85,36 @@
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
 
       <div class="pl-3 pr-3 pb-3 chart-container container-fluid">
         <div class="panel panel-default">
           <h4 class="ms-3 mb-3" id="statistics">Weitere Statistiken</h4>
+          
           <div class="row">
             <div class="col-md-6">
               <div class="bg-white mb-6 text-center">
                 <div><h5>BIP pro Kopf</h5></div>
-                <p class="p-3"></p>
-                <div><svg id="gdp_per_capita" width="500" height="500"></svg></div>
-                <p class="p-3"></p>
+                <img
+          id="loader_gdp_per_capita"
+          src="img/loader.gif"
+          class="d-none loader"
+        />
+                <div><svg class="img-fluid" id="gdp_per_capita"></svg></div>
+              
               </div>
             </div>
             <div class="col-md-6">
               <div class="bg-white mb-6 text-center">
                 <div><h5>Bevölkerungsdichte</h5></div>
-                <p class="p-3"></p>
-                <div><svg id="population_density" width="500" height="500"></svg></div>
-                <p class="p-3"></p>
+                <img
+          id="loader_population_density"
+          src="img/loader.gif"
+          class="d-none loader"
+        />
+                <div><svg class="img-fluid" id="population_density"></svg></div>
+               
               </div>
             </div>
           </div>

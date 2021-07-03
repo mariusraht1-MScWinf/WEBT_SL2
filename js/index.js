@@ -1,6 +1,28 @@
-VaccinationsOverTime.showLoader(true);
-VaccinationsOverTime.fillCountriesSelect();
-PopulationDensity.showData();
+d3.formatDefaultLocale({
+    "decimal": ",",
+    "grouping": [3],
+    "thousands": ".",
+    "currency": "€"
+  })
+  
+  function showLoader(id, show = false) {
+    switch (show) {
+      case true:
+        document.querySelector("#"+id).classList.remove("d-none");
+        break;
+      case false:
+        document.querySelector("#"+id).classList.add("d-none");
+        break;
+    }
+  }
 
-GdpPerCapita.showData();
+showLoader("loader_vaccinations_over_time", true);
+showLoader("loader_gdp_per_capita", true);
+showLoader("loader_population_density", true);
+setTimeout (function(){
+    VaccinationsOverTime.fillCountriesSelect();
+    PopulationDensity.showData();
+    GdpPerCapita.showData();
+}, 1000 + Math.random()*2000);
+
 
