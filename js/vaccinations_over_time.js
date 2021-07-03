@@ -158,59 +158,6 @@ class VaccinationsOverTime {
     });
   }
 
-  /*
-  static showData(code) {
-    fetch(`https://l1n.de/tl2/public/country/${code}/vaccinations`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        let aggregateddata = []; // new Object for pre aggregation
-        let record;  // copy of item 
-        let intervall = 1; // Days for counting 
-        data[0].new_vaccinations = data[0].people_vaccinated; // set the starting point because new vaccination is missing in first record and it doesnt start with 0
-        data.forEach(function (item, index) { //iteration over each item in data, index represents nth item
-          if (index % (intervall) == 0) {  // start new record if intervall is met 
-            if(index>0) { // push new record if record was created before 
-              aggregateddata.push(record);
-            }
-            if (item["new_vaccinations"]==undefined) {
-              item["new_vaccinations"] = item.total_vaccinations-data[index-1].total_vaccinations; // correction of wrong data 
-            }
-            record = Object.assign({}, item); //start new record, copy of item 
-          }
-          else { //if intervall is not met, sum up items in record 
-            if ((index+1) % (intervall) == 0 || data.length == (index+1)) { // Save the last date 
-              record.date = item.date; 
-              record.total_vaccinations = item.total_vaccinations; // set the last value since those numbers are already accummulated
-            }
-            if (item["new_vaccinations"]==undefined) {
-              item["new_vaccinations"] = item.total_vaccinations-data[index-1].total_vaccinations; // correction of wrong data 
-            }
-            for (let prop in item) { // go over each property in item 
-              if (prop != "date" && prop!= "total_vaccinations") { //dates shall not be saved 
-                if (record[prop]==undefined){ // sometimes item has less properties, add property if missing 
-                  record[prop] = item[prop];
-                }
-                else {
-                  record[prop]+=item[prop]; //sum up property 
-                }
-              }
-
-            }
-          }
-
-            if(data.length == (index+1)) // Call of last iteration
-              {
-                aggregateddata.push(record);
-              }
-          
-        });
-        console.log(aggregateddata);
-        VaccinationsOverTime.createChart(aggregateddata);
-        VaccinationsOverTime.createTable(aggregateddata);
-      });
-  }*/
-
   static showData(code) {
     fetch(`https://l1n.de/tl2/public/country/${code}/vaccinations`)
       .then((response) => response.json())
