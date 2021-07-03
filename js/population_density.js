@@ -3,46 +3,46 @@ class PopulationDensity {
     let data = [
       {
         value: 45229.245,
-        color: "#4daf4a",
+        color: "#e2bed3",
         label: "Belgium",
       },
       {
         value: 35220.084,
-        color: "#377eb8",
+        color: "#22c1c3",
         label: "Denmark",
       },
       {
         value: 34272.36,
-        color: "#ff7f00",
+        color: "#fcb045",
         label: "Germany",
       },
       { value: 38605.671, 
-        color: "#984ea3", 
+        color: "#e6d358", 
         label: "Sweden" 
       },
       {
         value: 39753.244,
-        color: "#e41a1c",
+        color: "#7ee3b1",
         label: "Great Britain",
       },
       {
         value: 39753.244,
-        color: "yellow",
+        color: "#e6fc46",
         label: "Italy",
       },
       {
         value: 39753.244,
-        color: "lightgreen",
+        color: "#fc6446",
         label: "Spain",
       },
       {
         value: 39753.244,
-        color: "lightblue",
+        color: "#8c9ade",
         label: "France",
       },
       {
         value: 39753.244,
-        color: "orange",
+        color: "#fc466b",
         label: "United States",
       },
     ];
