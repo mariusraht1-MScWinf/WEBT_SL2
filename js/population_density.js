@@ -1,53 +1,5 @@
 class PopulationDensity {
   static createChart(data) {
-    console.log(data)
-     let dataset =  [
-      {
-        value: 45229.245,
-        color: "#e2bed3",
-        label: "Belgium",
-      },
-      {
-        value: 35220.084,
-        color: "#22c1c3",
-        label: "Denmark",
-      },
-      {
-        value: 34272.36,
-        color: "#fcb045",
-        label: "Germany",
-      },
-      { value: 38605.671, 
-        color: "#e6d358", 
-        label: "Sweden" 
-      },
-      {
-        value: 39753.244,
-        color: "#7ee3b1",
-        label: "Great Britain",
-      },
-      {
-        value: 39753.244,
-        color: "#e6fc46",
-        label: "Italy",
-      },
-      {
-        value: 39753.244,
-        color: "#fc6446",
-        label: "Spain",
-      },
-      {
-        value: 39753.244,
-        color: "#8c9ade",
-        label: "France",
-      },
-      {
-        value: 39753.244,
-        color: "#fc466b",
-        label: "United States",
-      },
-    ]; 
-   console.log (dataset)
 
 
     let svg = d3.select("#population_density"),
@@ -117,16 +69,5 @@ class PopulationDensity {
         })
       })
     })
-    
-    
-
-    // TODO: Load all data for all countries
-    //fetch(`https://l1n.de/tl2/public/country/${code}/population_density`)
-      /*.then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        data = [{ value: data, code: code, color: "red" }];
-        GdpPerCapita.createChart(data);
-      });*/
   }
 }
