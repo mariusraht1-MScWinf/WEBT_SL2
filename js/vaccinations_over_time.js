@@ -115,12 +115,7 @@ class VaccinationsOverTime {
   static createTable(data) {
     let table = document.getElementById("vaccination_table");
     table.querySelectorAll("td:not(:first-child), th:not(:first-child)").forEach((x) => x.remove());
-    d3.formatDefaultLocale({
-      "decimal": ",",
-      "grouping": [3],
-      "thousands": ".",
-      "currency": "€"
-    })
+    
     data.forEach(function (item, index) {
       let t = document.createElement("th");
       t.innerHTML = item.date;

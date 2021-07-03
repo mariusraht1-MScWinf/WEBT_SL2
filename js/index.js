@@ -1,4 +1,10 @@
-
+d3.formatDefaultLocale({
+    "decimal": ",",
+    "grouping": [3],
+    "thousands": ".",
+    "currency": "€"
+  })
+  
   function showLoader(id, show = false) {
     switch (show) {
       case true:

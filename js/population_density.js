@@ -41,6 +41,8 @@ class PopulationDensity {
           return this != current
         });
         others.selectAll("path").style('opacity', 0.3);
+        others.selectAll("text").style("display", "none");
+        d3.select(current).selectAll("text").style("display", "inline");
       })
       .on('mouseout', function() {
         var current = this;
@@ -62,8 +64,9 @@ class PopulationDensity {
        return "translate("+ arc.centroid(d) + ")"; })
       .attr("text-anchor","middle")
       .style("font-size","18px")
+      .style("display", "none")
       .style("text-decoration","bold")
-      .text(function(d,i) { return data[i].label;});
+      .text(function(d,i) { return data[i].label+": "+d3.format(",")(data[i].value);});
 
       showLoader("loader_population_density", false);
 }

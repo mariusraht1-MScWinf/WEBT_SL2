@@ -39,6 +39,8 @@ class GdpPerCapita {
           return this != current
         });
         others.selectAll("path").style('opacity', 0.3);
+        others.selectAll("text").style("display", "none");
+        d3.select(current).selectAll("text").style("display", "inline");
       })
       .on('mouseout', function() {
         var current = this;
@@ -61,7 +63,8 @@ class GdpPerCapita {
       .attr("text-anchor","middle")
       .style("font-size","18px")
       .style("text-decoration","bold")
-      .text(function(d,i) { return data[i].label;});
+      .style("display", "none")
+      .text(function(d,i) { return data[i].label+": "+d3.format(",d")(data[i].value);});
 
       showLoader("loader_gdp_per_capita", false);
 }
