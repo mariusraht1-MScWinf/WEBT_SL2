@@ -104,15 +104,18 @@ class PopulationDensity {
   static showData() {
     let dataset =  [];
     let color = ["#e2bed3", "#22c1c3", "#fcb045", "#e6d358", "#7ee3b1", "#e6fc46", "#fc6446",  "#8c9ade", "#fc466b" ]
-    Countries.getData().then(async (json) => {
+    Countries.getData().then( (json) => {
       console.log(json)
-      json.forEach(async function (item, index) {
+      json.forEach(function (item, index) {
         fetch(`https://l1n.de/tl2/public/country/${item.code}/population_density`).then((response) => response.json())
         .then((data) => {
           dataset.push({ "value": data, "color": color[index], "label":item.country});
+          if (index==8) {
+            PopulationDensity.createChart(dataset)
+
+          }
         })
       })
-      this.createChart(dataset)
     })
     
     
