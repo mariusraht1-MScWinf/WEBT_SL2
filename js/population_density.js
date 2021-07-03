@@ -1,6 +1,7 @@
 class PopulationDensity {
-  static createChart() {
-    let data = [
+  static createChart(data) {
+    console.log(data)
+    /* data =  [
       {
         value: 45229.245,
         color: "#e2bed3",
@@ -45,7 +46,8 @@ class PopulationDensity {
         color: "#fc466b",
         label: "United States",
       },
-    ];
+    ]; */
+
 
     let svg = d3.select("#population_density"),
       width = svg.attr("width"),
@@ -98,16 +100,28 @@ class PopulationDensity {
       .style("text-decoration","bold")
       .text(function(d,i) { return data[i].label;});
 }
-  static showData(code) {
-    Countries.getData().then((json) => 
-      console.log(json))
+  static showData() {
+    let dataset=[];
+    let color = ["#e2bed3", "#22c1c3", "#fcb045", "#e6d358", "#7ee3b1", "#e6fc46", "#fc6446",  "#8c9ade", "#fc466b" ]
+    Countries.getData().then(async (json) => {
+      console.log(json)
+      json.forEach(function (item, index) {
+        fetch(`https://l1n.de/tl2/public/country/${item.code}/population_density`).then((response) => response.json())
+        .then((data) => {
+          dataset.push({ value: data, color: color[index], label:item.country});
+        })
+      })
+      this.createChart(dataset); 
+    })
+    
+
     // TODO: Load all data for all countries
-    fetch(`https://l1n.de/tl2/public/country/${code}/population_density`)
-      .then((response) => response.json())
+    //fetch(`https://l1n.de/tl2/public/country/${code}/population_density`)
+      /*.then((response) => response.json())
       .then((data) => {
         console.log(data);
         data = [{ value: data, code: code, color: "red" }];
         GdpPerCapita.createChart(data);
-      });
+      });*/
   }
 }
