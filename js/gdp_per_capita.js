@@ -12,7 +12,6 @@ class GdpPerCapita {
       if (!onresize) {
         window.addEventListener('resize', function () {
           let w = document.getElementById("gdp_per_capita").parentElement.clientWidth -20;
-          console.log(w)
           let svg = d3.select("#gdp_per_capita");
           svg.attr("width", w).attr("height", w);
           GdpPerCapita.createChart (data, true);

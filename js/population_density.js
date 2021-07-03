@@ -14,7 +14,6 @@ class PopulationDensity {
       if (!onresize) {
       window.addEventListener('resize', function () {
         let w = document.getElementById("population_density").parentElement.clientWidth -20;
-        console.log(w)
         let svg = d3.select("#population_density");
         svg.attr("width", w).attr("height", w);
         PopulationDensity.createChart (data, true);

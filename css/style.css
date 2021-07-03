@@ -11,3 +11,9 @@ h4 {
 .yaxis {
   font-size: 12px;
 }
+.scrollable {
+  overflow: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
