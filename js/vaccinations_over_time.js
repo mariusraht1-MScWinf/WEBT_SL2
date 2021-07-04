@@ -128,14 +128,44 @@ class VaccinationsOverTime {
       .style("fill", (gd) => color(gd.name))
       .attr("x", (gd) => x1(gd.name))
       .attr("y", (gd) => y(0))
-      .attr("height", (gd) => height - y(0));
+      .attr("height", (gd) => height - y(0))
+      .on("mouseover", function () {
+        document.body.style.cursor = "pointer";
+
+        let current = this;
+        let others = svg.selectAll("rect").filter(function (rect) {
+          return this != current;
+        });
+        others.attr("opacity", 0.3);
+      })
+      .on("mouseout", function () {
+        document.body.style.cursor = "default";
+
+        let current = this;
+        let others = svg.selectAll("rect").filter(function (arc) {
+          return this != current;
+        });
+        others.attr("opacity", 1);
+      });
 
     slice
       .selectAll("rect")
       .attr("y", (gd) => y(gd.value))
       .attr("height", (gd) => height - y(gd.value));
 
-    showLoader("loader_vaccinations_over_time", false);
+    // Show values for each bar
+    slice
+      .selectAll("text")
+      .data((d) => d.values)
+      .enter()
+      .append("text")
+      .attr("class", "barstext")
+      .attr("x", (d) => x1(d.name))
+      .attr("y", (d) => y(d.value) - 4)
+      .attr("font-size", ".5em")
+      .text((d) => d3.format(",d")(d.value));
+
+    App.showLoader("loader_vaccinations_over_time", false);
   }
 
   static createTable(data) {

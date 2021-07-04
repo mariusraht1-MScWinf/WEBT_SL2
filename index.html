@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CoronaVis - Visualisierung von Corona Trends</title>
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="css/weitere_statistiken.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <!-- JavaScript -->
     <link
@@ -27,14 +26,19 @@
       <h1 class="text-center">CoronaVis - Visualisierung von Corona Trends</h1>
       <nav class="navbar navbar-expand-lg navbar-light">
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"><a href="#allgemeine_informationen" class="nav-link text-light"> Allgemeine Informationen</a></li>
-          <li class="nav-item"><a href="#zeitliche_entwicklungen" class="nav-link text-light">Zeitliche Entwicklung </a></li>
+          <li class="nav-item">
+            <a href="#allgemeine_informationen" class="nav-link text-light"> Allgemeine Informationen</a>
+          </li>
+          <li class="nav-item">
+            <a href="#zeitliche_entwicklungen" class="nav-link text-light">Zeitliche Entwicklung </a>
+          </li>
           <li class="nav-item"><a href="#weitere_statistiken" class="nav-link text-light"> Weitere Statistiken</a></li>
         </ul>
       </nav>
     </header>
     <main class="container bg-light">
-      <div class="bg-light p-3"><a id="allgemeine_informationen"></a>
+      <div class="bg-light p-3">
+        <a id="allgemeine_informationen"></a>
         <img src="img/corona.jpg" alt="Corona Impfbild" class="img-fluid" />
         <p>
           Auch im Jahr 2021 hat uns die Pandemie fest im Griff. Diese Seite bietet eine Übersicht über relevante
@@ -90,15 +94,15 @@
 
           <div class="row">
             <div class="col-md-6">
-              <div class="bg-white mb-6 text-center">
-                <div><h5>BIP pro Kopf</h5></div>
+              <div class="bg-white mb-6 p-3 text-center">
+                <div class="pb-3"><h5>BIP pro Kopf</h5></div>
                 <img id="loader_gdp_per_capita" src="img/loader.gif" class="d-none loader" />
                 <div><svg class="img-fluid" id="gdp_per_capita"></svg></div>
               </div>
             </div>
             <div class="col-md-6">
-              <div class="bg-white mb-6 text-center">
-                <div><h5>Bevölkerungsdichte</h5></div>
+              <div class="bg-white mb-6 p-3 text-center">
+                <div class="pb-3"><h5>Bevölkerungsdichte</h5></div>
                 <img id="loader_population_density" src="img/loader.gif" class="d-none loader" />
                 <div><svg class="img-fluid" id="population_density"></svg></div>
               </div>
@@ -109,9 +113,12 @@
     </main>
 
     <script src="js/countries.js"></script>
+    <script src="js/pie_chart.js"></script>
     <script src="js/gdp_per_capita.js"></script>
     <script src="js/population_density.js"></script>
     <script src="js/vaccinations_over_time.js"></script>
+
+    <script src="js/app.js"></script>
     <script src="js/index.js"></script>
   </body>
 </html>

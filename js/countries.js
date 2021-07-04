@@ -1,11 +1,14 @@
 class Countries {
   static data = [];
 
-  static getData() {
+  static async getData() {
     if (!Countries.data || Countries.data.length == 0) {
-      Countries.data = fetch("data/countries.json")
+      return fetch("data/countries.json")
         .then((response) => response.json())
-        .then((json) => json.sort((a, b) => d3.ascending(a.country, b.country)));
+        .then((json) => {
+          Countries.data = json.sort((a, b) => d3.ascending(a.country, b.country));
+          return json;
+        });
     }
     return Countries.data;
   }

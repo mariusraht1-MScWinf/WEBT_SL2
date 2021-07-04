@@ -1,22 +1,23 @@
 class GdpPerCapita {
-  static createChart(data, onresize=false) {
-  
+  static createChart(data, onresize = false) {
     d3.selectAll("#gdp_per_capita > *").remove();
+    if (!data || data.length == 0) return;
+
     let svg = d3.select("#gdp_per_capita"),
-      width = document.getElementById("gdp_per_capita").parentElement.clientWidth -20,
+      width = document.getElementById("gdp_per_capita").parentElement.clientWidth - 20,
       height = width, // make it square
       radius = Math.min(width, height) / 2,
       g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-      svg.attr("width", width).attr("height", height);
+    svg.attr("width", width).attr("height", height);
 
-      if (!onresize) {
-        window.addEventListener('resize', function () {
-          let w = document.getElementById("gdp_per_capita").parentElement.clientWidth -20;
-          let svg = d3.select("#gdp_per_capita");
-          svg.attr("width", w).attr("height", w);
-          GdpPerCapita.createChart (data, true);
-        })
-      }
+    if (!onresize) {
+      window.addEventListener("resize", function () {
+        let svg = d3.select("#gdp_per_capita");
+        let w = svg.node().parentElement.clientWidth - 20;
+        svg.attr("width", w).attr("height", w);
+        GdpPerCapita.createChart(data, true);
+      });
+    }
 
     let color = d3.scaleOrdinal(data.map((d) => d.color));
 
@@ -33,62 +34,72 @@ class GdpPerCapita {
       .enter()
       .append("g")
       .attr("class", "arc")
-      .on('mouseover', function() {
-        var current = this
-        var others = svg.selectAll(".arc").filter(function(el) {
-          return this != current
-        });
-        others.selectAll("path").style('opacity', 0.3);
-        others.selectAll("text").style("display", "none");
-        d3.select(current).selectAll("text").style("display", "inline");
+      .on("mouseover", function () {
+        PieChart.onMouseover(svg, this);
       })
-      .on('mouseout', function() {
-        var current = this;
-        d3.select(this)
-          .style('opacity', 1);
-        var others = svg.selectAll(".arc").filter(function(el) {
-          return this != current
-        });
-        others.selectAll("path").style('opacity', 1);
+      .on("mouseout", function () {
+        PieChart.onMouseout(svg, this);
       });
+
     arcs
       .append("path")
       .attr("fill", (d, i) => color(i))
       .attr("d", arc);
+
     arcs
-       .append("svg:text")
-       .attr( "transform",function(d) {
-       var c = arc.centroid(d);
-       return "translate("+ arc.centroid(d) + ")"; })
-      .attr("text-anchor","middle")
-      .style("font-size","18px")
-      .style("text-decoration","bold")
-      .style("display", "none")
-      .text(function(d,i) { return data[i].label+": "+d3.format(",d")(data[i].value);});
+      .append("svg:text")
+      .attr("transform", (d) => "translate(" + arc.centroid(d) + ")")
+      .attr("text-anchor", "middle")
+      .append("tspan")
+      .attr("fill", "white")
+      .attr("font-size", ".9em")
+      .attr("font-weight", "bold")
+      .text((d, i) => data[i].label);
 
-      showLoader("loader_gdp_per_capita", false);
-}
+    arcs
+      .selectAll("text")
+      .append("tspan")
+      .attr("class", "text")
+      .attr("fill", "white")
+      .attr("font-size", ".9em")
+      .attr("x", "0")
+      .attr("dy", "1.2em")
+      .text((d, i) => d3.format(",d")(d.value));
 
-static showData() {
-  let dataset =  [];
-  let color = ["#e2bed3", "#22c1c3", "#fcb045", "#e6d358", "#7ee3b1", "#e6fc46", "#fc6446",  "#8c9ade", "#fc466b" ]
-  Countries.getData().then( (json) => {
-    // recursive function to load country data completely before creating the pie chart
-    function getCountryData(json) {
-      if (json.length == 0) { // termination condition: no country left to load, so draw chart
-        GdpPerCapita.createChart (dataset);
-      } else { // while countries left
-        let item = json.pop(); // get next country and remove it from array
-        // call API and call getCountryData recursively in promise
-        fetch(`https://l1n.de/tl2/public/country/${item.code}/gdp_per_capita`).then((response) => response.json())
+    App.showLoader("loader_gdp_per_capita", false);
+  }
+
+  static showData() {
+    let dataset = [];
+    let color = ["#e2bed3", "#22c1c3", "#fcb045", "#e6d358", "#7ee3b1", "#e6fc46", "#fc6446", "#8c9ade", "#fc466b"];
+    Countries.getData().then((countries) => {
+      if (!countries || countries.length == 0) return;
+      Promise.all(countries.map((country) => fetch(`https://l1n.de/tl2/public/country/${country.code}/gdp_per_capita`)))
+        .then((responses) => Promise.all(responses.map((response) => response.json())))
         .then((data) => {
-          dataset.push({ "value": data, "color": color.pop(), "label":item.country});
-          getCountryData (json);
-        })
-      }
-    }
-    getCountryData (json);
-  })
-}
+          countries.forEach((country, index) => {
+            dataset.push({ value: data[index], color: color.pop(), label: country.country });
+          });
+          GdpPerCapita.createChart(dataset);
+        });
 
+      // function getCountryData(json) {
+      //   if (json.length == 0) {
+      //     // termination condition: no country left to load, so draw chart
+      //     GdpPerCapita.createChart(dataset);
+      //   } else {
+      //     // while countries left
+      //     let item = json.pop(); // get next country and remove it from array
+      //     // call API and call getCountryData recursively in promise
+      //     fetch(`https://l1n.de/tl2/public/country/${item.code}/gdp_per_capita`)
+      //       .then((response) => response.json())
+      //       .then((data) => {
+      //         dataset.push({ value: data, color: color.pop(), label: item.country });
+      //         getCountryData(json);
+      //       });
+      //   }
+      // }
+      // getCountryData(countries);
+    });
+  }
 }
