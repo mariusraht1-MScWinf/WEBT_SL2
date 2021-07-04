@@ -44,7 +44,7 @@ class VaccinationsOverTime {
     let width = w - margin.left - margin.right,
       height = w / 2 - margin.top - margin.bottom;
 
-    let x0 = d3.scaleBand().rangeRound([0, width], 0.5);
+    let x0 = d3.scaleBand().rangeRound([0, width], 0.5).paddingInner(0.2);
     let x1 = d3.scaleBand();
     let y = d3.scaleLinear().rangeRound([height, 0]);
 
