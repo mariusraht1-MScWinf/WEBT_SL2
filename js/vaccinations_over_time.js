@@ -159,7 +159,6 @@ class VaccinationsOverTime {
       .data((d) => d.values)
       .enter()
       .append("text")
-      .attr("class", "barstext")
       .attr("x", (d) => x1(d.name))
       .attr("y", (d) => y(d.value) - 4)
       .attr("font-size", ".5em")
