@@ -82,24 +82,6 @@ class GdpPerCapita {
           });
           GdpPerCapita.createChart(dataset);
         });
-
-      // function getCountryData(json) {
-      //   if (json.length == 0) {
-      //     // termination condition: no country left to load, so draw chart
-      //     GdpPerCapita.createChart(dataset);
-      //   } else {
-      //     // while countries left
-      //     let item = json.pop(); // get next country and remove it from array
-      //     // call API and call getCountryData recursively in promise
-      //     fetch(`https://l1n.de/tl2/public/country/${item.code}/gdp_per_capita`)
-      //       .then((response) => response.json())
-      //       .then((data) => {
-      //         dataset.push({ value: data, color: color.pop(), label: item.country });
-      //         getCountryData(json);
-      //       });
-      //   }
-      // }
-      // getCountryData(countries);
     });
   }
 }
