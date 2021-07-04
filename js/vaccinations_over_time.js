@@ -1,13 +1,4 @@
 class VaccinationsOverTime {
-  static svg;
-  static groupKey = "date";
-  static keys;
-  static x;
-  static y;
-  static margin = { top: 20, right: 20, bottom: 40, left: 90 };
-  static width = 860 - this.margin.left - this.margin.right;
-  static height = 600 - this.margin.top - this.margin.bottom;
-
   static fillCountriesSelect() {
     Countries.getData().then((json) => {
       console.log(json);
@@ -34,12 +25,12 @@ class VaccinationsOverTime {
         key: new Date(d.date),
         values: [
           { name: "first", value: d.people_fully_vaccinated },
-          { name: "complete", value: d.new_vaccinations },
+          { name: "complete", value: d.total_vaccinations },
         ],
       });
     });
 
-    let margin = { top: 20, right: 20, bottom: 50, left: 80 };
+    let margin = { top: 20, right: 80, bottom: 50, left: 80 };
     let w = document.getElementById("vaccinations_over_time").parentElement.clientWidth;
     let width = w - margin.left - margin.right,
       height = w / 2 - margin.top - margin.bottom;
@@ -90,7 +81,7 @@ class VaccinationsOverTime {
       .attr("dx", width / 2)
       .attr("dy", 34)
       .attr("fill", "black")
-      .attr("font-size", "14px")
+      .attr("font-size", "1.4em")
       .attr("font-weight", "bold")
       .text("Datum");
 
@@ -105,7 +96,7 @@ class VaccinationsOverTime {
       .attr("dy", margin.left)
       .attr("transform", "rotate(90)")
       .attr("fill", "black")
-      .attr("font-size", "14px")
+      .attr("font-size", "1.4em")
       .attr("font-weight", "bold")
       .text("Impfungen (kummuliert)");
 
@@ -161,7 +152,7 @@ class VaccinationsOverTime {
       .append("text")
       .attr("x", (d) => x1(d.name))
       .attr("y", (d) => y(d.value) - 4)
-      .attr("font-size", ".5em")
+      .attr("font-size", ".8em")
       .text((d) => d3.format(",d")(d.value));
 
     App.showLoader("loader_vaccinations_over_time", false);
@@ -197,9 +188,15 @@ class VaccinationsOverTime {
           let month = item[0].date.toString().substring(0, 7);
           aggregatedData.push({
             date: month,
-            new_vaccinations: d3.sum(item, (d) => d.new_vaccinations),
-            people_fully_vaccinated: d3.max(item, (d) => d.people_fully_vaccinated),
-            total_vaccinations: d3.max(item, (d) => d.total_vaccinations),
+            new_vaccinations: d3.sum(item, (d) =>
+              !d.new_vaccinations || isNaN(d.new_vaccinations) ? 0 : d.new_vaccinations
+            ),
+            people_fully_vaccinated: d3.max(item, (d) =>
+              !d.people_fully_vaccinated || isNaN(d.people_fully_vaccinated) ? 0 : d.people_fully_vaccinated
+            ),
+            total_vaccinations: d3.max(item, (d) =>
+              !d.total_vaccinations || isNaN(d.total_vaccinations) ? 0 : d.total_vaccinations
+            ),
           });
         });
         VaccinationsOverTime.createChart(aggregatedData);

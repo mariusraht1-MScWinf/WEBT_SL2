@@ -1,10 +1,11 @@
 # WEBT_SL2
 
-Pretty Printer: Shift + Alt + F
+Startseite: index.html
+Browser: Chrome 91.0.4472.77
+         Vivaldi 3.8.2259.42
+LiveServer 5.6.1 (Extension of Visual Studio Code)
 
-Aufteilung in 3 Bereiche: 
-1. Navigation --> Natasha 
-2. Zeitliche Entwicklung --> Marius 
-3. Datum + Weitere Statistiken --> Zdravka 
-
-Dienstag oder Mittwoch spontan 
+##Autoren
+Natasha Jung
+Marius Raht
+Zdravka Todorova

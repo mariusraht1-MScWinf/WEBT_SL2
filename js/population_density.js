@@ -62,7 +62,7 @@ class PopulationDensity {
       .attr("font-size", ".9em")
       .attr("x", "0")
       .attr("dy", "1.2em")
-      .text((d, i) => d3.format(",d")(d.value));
+      .text((d, i) => d3.format(",")(d.value));
 
     App.showLoader("loader_population_density", false);
   }

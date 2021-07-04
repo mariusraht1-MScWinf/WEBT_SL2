@@ -1,8 +1,4 @@
 class PieChart {
-  static createChart(data, id) {
-
-  }
-
   static onMouseover(svg, current) {
     document.body.style.cursor = "pointer";
 
