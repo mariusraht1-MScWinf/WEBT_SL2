@@ -81,7 +81,8 @@ class GdpPerCapita {
             dataset.push({ value: data[index], color: color.pop(), label: country.country });
           });
           GdpPerCapita.createChart(dataset);
-        });
+        })
+        .catch((error) => App.showError("loader_gdp_per_capita", true));
     });
   }
 }

@@ -58,7 +58,9 @@
         ></select>
       </div>
       <div class="p-3 text-center">
-        <img id="loader_vaccinations_over_time" src="img/loader.gif" class="d-none loader" />
+        <div id="loader_vaccinations_over_time" class="loaderContainer">
+          <img src="img/loader.gif" alt="Lädt Daten..." /><br /><span></span><span></span>
+        </div>
         <svg id="vaccinations_over_time" class="img-fluid"></svg>
       </div>
       <div class="container-fluid">
@@ -92,14 +94,18 @@
             <div class="col-md-6">
               <div class="bg-white mb-6 p-3 text-center">
                 <div class="pb-3"><h5>BIP pro Kopf</h5></div>
-                <img id="loader_gdp_per_capita" src="img/loader.gif" class="d-none loader" />
+                <div id="loader_gdp_per_capita" class="loaderContainer">
+                  <img src="img/loader.gif" alt="Lädt Daten..." /><br /><span></span><span></span>
+                </div>
                 <div><svg class="img-fluid" id="gdp_per_capita"></svg></div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="bg-white mb-6 p-3 text-center">
                 <div class="pb-3"><h5>Bevölkerungsdichte</h5></div>
-                <img id="loader_population_density" src="img/loader.gif" class="d-none loader" />
+                <div id="loader_population_density" class="loaderContainer">
+                  <img src="img/loader.gif" alt="Lädt Daten..." /><br /><span></span><span></span>
+                </div>
                 <div><svg class="img-fluid" id="population_density"></svg></div>
               </div>
             </div>

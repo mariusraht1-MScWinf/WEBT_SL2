@@ -8,6 +8,12 @@ class Countries {
         .then((json) => {
           Countries.data = json.sort((a, b) => d3.ascending(a.country, b.country));
           return json;
+        })
+        .catch((error) => {
+          App.showError("loader_vaccinations_over_time", true);
+          App.showError("loader_gdp_per_capita", true);
+          App.showError("loader_population_density", true);
+          console.log(error);
         });
     }
     return Countries.data;

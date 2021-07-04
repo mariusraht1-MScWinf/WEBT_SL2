@@ -201,6 +201,7 @@ class VaccinationsOverTime {
         });
         VaccinationsOverTime.createChart(aggregatedData);
         VaccinationsOverTime.createTable(aggregatedData);
-      });
+      })
+      .catch((error) => App.showError("loader_vaccinations_over_time", true));
   }
 }

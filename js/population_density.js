@@ -85,7 +85,7 @@ class PopulationDensity {
             .then((data) => {
               dataset.push({ value: data, color: color.pop(), label: item.country });
               getCountryData(json);
-            });
+            }).catch((error) => App.showError("loader_population_density", true));
         }
       }
       getCountryData(json);

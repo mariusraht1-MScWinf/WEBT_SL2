@@ -20,7 +20,27 @@ h4 {
 }
 
 /* Center loader within div */
-.loader {
+.loaderContainer {
   margin: 100px auto;
   display: block;
+}
+
+.loaderContainer span:first-of-type {
+  font-weight: bold;
+}
+
+.loaderContainer img {
+  margin-bottom: 6px;
+}
+
+@media screen and (max-width: 992px) {
+  main {
+    margin-top: 220px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    margin-top: 214px;
+  }
 }
